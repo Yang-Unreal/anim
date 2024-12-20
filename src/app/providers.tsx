@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { TransitionRouter } from "next-transition-router";
-import { animate } from "motion/react"; // Ensure you have framer-motion installed
+import { animate } from "motion/react";
 
 export default function Providers({ children }: { children: React.ReactNode }) {
   const wrapperRef = useRef<HTMLDivElement>(null!);
@@ -16,10 +16,9 @@ export default function Providers({ children }: { children: React.ReactNode }) {
         // First layer animation
         animate(
           wrapperRef.current,
-          { opacity: [1, 0] },
+          { opacity: [1, 0.5], scale: 0.9 },
           {
-            duration: 0.7,
-            onComplete: next,
+            duration: 0.5,
           }
         );
 
@@ -40,6 +39,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
             duration: 0.5,
             delay: 0.2, // Stagger delay of 0.2 seconds
             ease: [0.785, 0.135, 0.15, 0.86], // Cubic-bezier approximation for circ.inOut
+            onComplete: next,
           }
         );
 
@@ -50,7 +50,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
         // Similar logic for the enter transition
         animate(
           wrapperRef.current,
-          { opacity: [0, 1] },
+          { opacity: [0, 1], scale: 1 },
           {
             duration: 0.7,
           }
@@ -60,7 +60,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
           secondSlide.current,
           { y: [0, "-100%"] },
           {
-            duration: 0.5,
+            duration: 0.7,
             ease: [0.785, 0.135, 0.15, 0.86], // Cubic-bezier approximation for circ.inOut
           }
         );
@@ -79,11 +79,11 @@ export default function Providers({ children }: { children: React.ReactNode }) {
     >
       <div
         ref={slide}
-        className="fixed inset-0 z-50 translate-y-full bg-orange-500"
+        className="fixed inset-0 z-50 translate-y-full bg-[#E5EFD7]"
       ></div>
       <div
         ref={secondSlide}
-        className="fixed inset-0 z-50 translate-y-full bg-red-500"
+        className="fixed inset-0 z-50 translate-y-full  bg-[#107885]"
       ></div>
       <div ref={wrapperRef}>{children}</div>
     </TransitionRouter>
