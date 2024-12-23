@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { TransitionRouter } from "next-transition-router";
 import { animate } from "motion/react";
 
-export default function Providers({ children }: { children: React.ReactNode }) {
+export default function Slides({ children }: { children: React.ReactNode }) {
   const wrapperRef = useRef<HTMLDivElement>(null!);
   const slide = useRef<HTMLDivElement>(null!);
   const secondSlide = useRef<HTMLDivElement>(null!);

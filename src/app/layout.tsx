@@ -1,11 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-
 import "./globals.css";
-// import StairTransition from "@/app/stair";
-// import Providers from "@/app/providers";
-// import { Debug } from "@/app/components/debug";
-import CurveTransition from "@/app/curve";
+import CurveTransition from "@/app/components/curve/curve";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -31,12 +28,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {/* <Providers> */}
-        {/* <StairTransition> */}
         <CurveTransition> {children}</CurveTransition>
-
-        {/* </StairTransition> */}
-        {/* </Providers> */}
       </body>
     </html>
   );
