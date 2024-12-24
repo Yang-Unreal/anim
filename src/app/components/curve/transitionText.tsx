@@ -18,3 +18,5 @@ export const TransitionText = memo(function TransitionText({
     </p>
   );
 });
+
+TransitionText.displayName = "TransitionText";

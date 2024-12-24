@@ -1,9 +1,27 @@
-export type Routes = {
+export interface Routes {
   "/": string;
   "/about": string;
-};
+}
 
-export type WindowDimensions = {
+export interface WindowDimensions {
   width: number;
   height: number;
-};
+}
+
+export interface TransitionTextProps {
+  textRef: React.RefObject<HTMLParagraphElement>;
+}
+export interface TransitionPathProps {
+  svgRef: React.RefObject<SVGSVGElement>;
+  pathRef: React.RefObject<SVGPathElement>;
+}
+
+export interface PathsOutput {
+  initial: string;
+  leave: string;
+  enter: string;
+}
+
+export interface CurveTransitionProps {
+  children: React.ReactNode;
+}

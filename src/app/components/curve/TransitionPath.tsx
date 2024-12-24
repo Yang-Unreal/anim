@@ -14,3 +14,5 @@ export const TransitionPath = memo(function TransitionPath({
     </svg>
   );
 });
+
+TransitionPath.displayName = "TransitionPath";

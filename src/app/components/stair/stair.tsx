@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { TransitionRouter } from "next-transition-router";
 import { animate } from "motion/react"; // Ensure you have motion installed
-import { Debug } from "./components/debug";
+import { Debug } from "../debug";
 export default function StairTransition({
   children,
 }: {
