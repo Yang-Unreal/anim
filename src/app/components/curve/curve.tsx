@@ -71,7 +71,14 @@ export default function CurveTransition({ children }: CurveTransitionProps) {
         animate(
           paraRef.current,
           { opacity: [1, 0], top: ["50%", "-10%"] },
-          { duration: 1, ease: [1, 0, 0.15, 1] }
+          {
+            opacity: {
+              duration: 0.8,
+              ease: [1, 0, 0.15, 1],
+            },
+            duration: 1,
+            ease: [1, 0, 0.15, 1],
+          }
         )
       );
 
