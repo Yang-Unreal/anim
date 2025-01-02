@@ -5,11 +5,11 @@ import { TransitionRouter } from "next-transition-router";
 import { animate } from "motion/react";
 import { Debug } from "../debug";
 
-import { useWindowDimensions } from "@/app/lib/hooks/useWindowDimensions";
-import { generatePaths } from "@/app/lib/utils/pathGenerators";
+import { useWindowDimensions } from "@/lib/hooks/useWindowDimensions";
+import { generatePaths } from "@/lib/utils/pathGenerators";
 import { TransitionText } from "./transitionText";
-import { TransitionPath } from "@/app/components/curve/TransitionPath";
-import type { CurveTransitionProps } from "@/app/lib/type";
+import { TransitionPath } from "@/components/curve/TransitionPath";
+import type { CurveTransitionProps } from "@/lib/type";
 
 export default function CurveTransition({ children }: CurveTransitionProps) {
   const svgRef = useRef<SVGSVGElement>(null!);

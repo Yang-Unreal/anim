@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import type { WindowDimensions } from "@/app/lib/type";
+import type { WindowDimensions } from "@/lib/type";
 
 export const useWindowDimensions = (): WindowDimensions => {
   const [dimensions, setDimensions] = useState<WindowDimensions>({

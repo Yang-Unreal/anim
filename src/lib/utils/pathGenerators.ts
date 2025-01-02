@@ -1,4 +1,4 @@
-import type { WindowDimensions, PathsOutput } from "@/app/lib/type";
+import type { WindowDimensions, PathsOutput } from "@/lib/type";
 
 export const generatePaths = ({
   width,

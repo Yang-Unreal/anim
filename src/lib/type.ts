@@ -25,3 +25,13 @@ export interface PathsOutput {
 export interface CurveTransitionProps {
   children: React.ReactNode;
 }
+
+export interface Project {
+  title: string;
+  src: string;
+  color: string;
+}
+
+export interface ProjectGalleryProps {
+  initialProjects: Project[];
+}

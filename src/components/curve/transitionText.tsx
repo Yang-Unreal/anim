@@ -1,8 +1,8 @@
 import { memo } from "react";
 import { usePathname } from "next/navigation";
-import type { Routes } from "@/app/lib/type";
-import { ROUTES } from "@/app/lib/constants/animations";
-import type { TransitionTextProps } from "@/app/lib/type";
+import type { Routes } from "@/lib/type";
+import { ROUTES } from "@/lib/constants/animations";
+import type { TransitionTextProps } from "@/lib/type";
 
 export const TransitionText = memo(function TransitionText({
   textRef,
