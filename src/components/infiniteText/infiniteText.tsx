@@ -28,7 +28,7 @@ export default function InfiniteText() {
     }
 
     requestAnimationFrame(animate);
-  }, []);
+  });
 
   const animate = () => {
     if (xPercent < -100) {
@@ -41,11 +41,11 @@ export default function InfiniteText() {
       gsap.set(secondText.current, { xPercent: xPercent });
     }
     requestAnimationFrame(animate);
-    xPercent += 0.05 * direction.current;
+    xPercent += 0.03 * direction.current;
   };
 
   return (
-    <div className="w-full h-full overflow-hidden flex relative">
+    <div className="w-full h-full overflow-hidden flex relative z-[-1]">
       <div className="absolute bottom-0">
         <div ref={slider} className="relative whitespace-nowrap">
           <p

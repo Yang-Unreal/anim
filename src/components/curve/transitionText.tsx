@@ -1,20 +1,18 @@
 import { memo } from "react";
-import { usePathname } from "next/navigation";
-import type { Routes } from "@/lib/type";
-import { ROUTES } from "@/lib/constants/animations";
-import type { TransitionTextProps } from "@/lib/type";
 
+import type { TransitionTextProps } from "@/lib/type";
+import { UseTransitionTextState } from "@/components/provider/textProvider";
 export const TransitionText = memo(function TransitionText({
   textRef,
 }: TransitionTextProps) {
-  const pathname = usePathname();
+  const { transitionTextContent } = UseTransitionTextState();
 
   return (
     <p
       ref={textRef}
-      className="text-[64px] font-semibold text-white absolute pointer-events-none left-[50%] top-[60%] z-3 transform -translate-x-[50%] -translate-y-[50%] opacity-0"
+      className="text-[64px] font-semibold text-white absolute pointer-events-none left-[50%] top-[60%]  transform -translate-x-[50%] -translate-y-[50%] opacity-0 z-[100]"
     >
-      {ROUTES[pathname as keyof Routes]}
+      {transitionTextContent}
     </p>
   );
 });

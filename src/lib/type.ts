@@ -1,7 +1,16 @@
-export interface Routes {
+export interface TransitionRoutes {
   "/": string;
   "/about": string;
+  "/work": string;
+  "/contact": string;
 }
+
+export type NavItem = {
+  title: string;
+  href: Routes;
+};
+
+export type Routes = "/" | "/about" | "/work" | "/contact";
 
 export interface WindowDimensions {
   width: number;
@@ -22,7 +31,7 @@ export interface PathsOutput {
   enter: string;
 }
 
-export interface CurveTransitionProps {
+export interface ChildProps {
   children: React.ReactNode;
 }
 
@@ -34,4 +43,20 @@ export interface Project {
 
 export interface ProjectGalleryProps {
   initialProjects: Project[];
+}
+
+export interface CustomLinkProps {
+  data: {
+    title: string;
+    href: string;
+    index: number;
+  };
+  isActive: boolean;
+  setSelectedIndicator: (href: string) => void;
+}
+
+export interface NavContentProps {
+  selectedIndicator: string;
+  setSelectedIndicator: (href: string) => void;
+  pathname: string;
 }

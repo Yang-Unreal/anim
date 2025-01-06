@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ReactLenis } from "@/lib/utils/lenis";
-import CurveTransition from "@/components/curve/curve";
+import CurveTransition from "@/components/curve/Transitioncurve";
 
+import { Debug } from "@/components/debug";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -30,7 +31,11 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ReactLenis root>
-          <CurveTransition>{children} </CurveTransition>
+          <CurveTransition>
+            {children}
+
+            <Debug />
+          </CurveTransition>
         </ReactLenis>
       </body>
     </html>

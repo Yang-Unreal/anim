@@ -27,7 +27,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/components/project/project.js"
+    "src/components/project/project.js",
+    "src/components/header/nav/link/link.jsx"
   ],
   "exclude": ["node_modules"]
 }
