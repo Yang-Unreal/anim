@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { slide, scale } from "@/lib/constants/nav";
 import { useTransitionState } from "next-transition-router";
 import { CustomLinkProps } from "@/lib/type";
