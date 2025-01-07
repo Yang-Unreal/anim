@@ -4,13 +4,17 @@ import { slide, scale } from "@/lib/constants/nav";
 import { useTransitionState } from "next-transition-router";
 import { CustomLinkProps } from "@/lib/type";
 
-import { UseTransitionTextState } from "@/components/provider/textProvider";
+import {
+  UseTransitionTextState,
+  UseMenuState,
+} from "@/components/provider/contextProvider";
 export default function CustomLink({
   data,
   isActive,
   setSelectedIndicator,
 }: CustomLinkProps) {
   const { setTransitionTextContent } = UseTransitionTextState();
+  const { setMenuIsActive } = UseMenuState();
   const { title, href, index } = data;
   const { stage } = useTransitionState();
   const isTransitionCompleted = stage == "none";
@@ -21,7 +25,10 @@ export default function CustomLink({
       onMouseEnter={() => {
         setSelectedIndicator(href);
       }}
-      onClick={() => setTransitionTextContent(title)}
+      onClick={() => {
+        setTransitionTextContent(title);
+        setMenuIsActive(false);
+      }}
       custom={index}
       variants={slide}
       initial="initial"

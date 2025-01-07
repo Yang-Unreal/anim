@@ -9,7 +9,10 @@ import { TransitionText } from "./transitionText";
 import { TransitionPath } from "@/components/curve/TransitionPath";
 import type { ChildProps } from "@/lib/type";
 import Header from "@/components/header/header";
-import { TransitionProvider } from "@/components/provider/textProvider";
+import {
+  TransitionProvider,
+  MenuProvider,
+} from "@/components/provider/contextProvider";
 
 export default function CurveTransition({ children }: ChildProps) {
   const svgRef = useRef<SVGSVGElement>(null!);
@@ -22,7 +25,7 @@ export default function CurveTransition({ children }: ChildProps) {
 
   const handleLeaveAnimation = useCallback(
     (next: () => void) => {
-      if (!svgRef.current || !pathRef.current) {
+      if (!svgRef.current || !pathRef.current || !paraRef.current) {
         next();
         return;
       }
@@ -96,7 +99,9 @@ export default function CurveTransition({ children }: ChildProps) {
       enter={handleEnterAnimation}
     >
       <TransitionProvider>
-        <Header />
+        <MenuProvider>
+          <Header />
+        </MenuProvider>
         {children}
 
         {width > 0 && (

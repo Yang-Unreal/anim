@@ -30,3 +30,31 @@ export function UseTransitionTextState() {
   }
   return context;
 }
+
+interface MenuContextType {
+  menuIsActive: boolean;
+  setMenuIsActive: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const MenuContext = createContext<MenuContextType>({
+  menuIsActive: false,
+  setMenuIsActive: () => {},
+});
+
+export function MenuProvider({ children }: ChildProps) {
+  const [menuIsActive, setMenuIsActive] = useState<boolean>(false);
+
+  return (
+    <MenuContext.Provider value={{ menuIsActive, setMenuIsActive }}>
+      {children}
+    </MenuContext.Provider>
+  );
+}
+
+export function UseMenuState() {
+  const context = useContext(MenuContext);
+  if (!context) {
+    throw new Error("useTransitionState must be used within a MyProvider");
+  }
+  return context;
+}

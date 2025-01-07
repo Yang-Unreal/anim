@@ -1,7 +1,7 @@
 import { motion } from "motion/react";
 
 export default function Curve() {
-  const height = window.innerHeight; // Get the height of the window
+  const height = window.innerHeight;
 
   const initialPath = `M100 0 L200 0 L200 ${height} L100 ${height} Q-100 ${
     height / 2
@@ -17,11 +17,11 @@ export default function Curve() {
     },
     enter: {
       d: targetPath,
-      transition: { duration: 1, ease: [0.5, 0, 0.2, 1] },
+      transition: { duration: 0.6, ease: [0.5, 0, 0.2, 1] },
     },
     exit: {
       d: initialPath,
-      transition: { duration: 0.8, ease: [0.5, 0, 0.2, 1] },
+      transition: { duration: 0.6, ease: [0.5, 0, 0.2, 1] },
     },
   };
 
