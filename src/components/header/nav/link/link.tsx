@@ -20,8 +20,8 @@ export default function CustomLink({
       className="relative flex items-center"
       onMouseEnter={() => {
         setSelectedIndicator(href);
-        setTransitionTextContent(title);
       }}
+      onClick={() => setTransitionTextContent(title)}
       custom={index}
       variants={slide}
       initial="initial"
