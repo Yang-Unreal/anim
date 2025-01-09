@@ -14,8 +14,8 @@ function ProjectGallery({ initialProjects }: ProjectGalleryProps) {
   }, []);
 
   return (
-    <section className="flex h-screen items-center justify-center">
-      <div className="w-[1000px] flex flex-col items-center justify-center">
+    <section className="flex h-full items-center justify-center">
+      <div className="w-[1320px] flex flex-col items-center justify-center">
         {initialProjects.map((project, index) => (
           <ProjectMemo
             key={project.title}

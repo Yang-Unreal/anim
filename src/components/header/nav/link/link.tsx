@@ -1,12 +1,9 @@
 // import Link from "next/link";
 import { motion } from "motion/react";
 import { slide, scale } from "@/lib/constants/nav";
-
+import Link from "next/link";
 import { CustomLinkProps } from "@/lib/type";
-import {
-  Link as TransitionLink,
-  useTransitionState,
-} from "next-transition-router";
+import { useTransitionState } from "next-transition-router";
 import {
   UseTransitionTextState,
   UseMenuState,
@@ -28,9 +25,6 @@ export default function CustomLink({
       onMouseEnter={() => {
         setSelectedIndicator(href);
       }}
-      onClick={() => {
-        setTransitionTextContent(title);
-      }}
       custom={index}
       variants={slide}
       initial="initial"
@@ -42,13 +36,16 @@ export default function CustomLink({
         animate={isActive ? "open" : "closed"}
         className="absolute -left-[30px] h-2.5 w-2.5 rounded-full bg-white"
       />
-      <TransitionLink
+      <Link
         href={href}
         className={`${isTransitionCompleted ? "" : "pointer-events-none"}`}
-        onClick={() => setMenuIsActive(false)}
+        onClick={() => {
+          setMenuIsActive(false);
+          setTransitionTextContent(title);
+        }}
       >
         {title}
-      </TransitionLink>
+      </Link>
     </motion.div>
   );
 }

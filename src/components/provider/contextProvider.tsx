@@ -1,3 +1,5 @@
+"use client";
+
 import { createContext, useContext, useState } from "react";
 import { ChildProps } from "@/lib/type";
 interface TransitionContextType {

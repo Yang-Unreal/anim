@@ -8,11 +8,7 @@ import { generatePaths } from "@/lib/utils/pathGenerators";
 import { TransitionText } from "./transitionText";
 import { TransitionPath } from "@/components/curve/TransitionPath";
 import type { ChildProps } from "@/lib/type";
-import Header from "@/components/header/header";
-import {
-  TransitionProvider,
-  MenuProvider,
-} from "@/components/provider/contextProvider";
+import { TransitionProvider } from "@/components/provider/contextProvider";
 
 export default function CurveTransition({ children }: ChildProps) {
   const svgRef = useRef<SVGSVGElement>(null!);
@@ -94,14 +90,11 @@ export default function CurveTransition({ children }: ChildProps) {
   );
   return (
     <TransitionRouter
-      auto
+      auto={true}
       leave={handleLeaveAnimation}
       enter={handleEnterAnimation}
     >
       <TransitionProvider>
-        <MenuProvider>
-          <Header />
-        </MenuProvider>
         {children}
 
         {width > 0 && (

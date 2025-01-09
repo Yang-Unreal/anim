@@ -41,7 +41,7 @@ export default function InfiniteText() {
       gsap.set(secondText.current, { xPercent: xPercent });
     }
     requestAnimationFrame(animate);
-    xPercent += 0.03 * direction.current;
+    xPercent += 0.01 * direction.current;
   };
 
   return (
