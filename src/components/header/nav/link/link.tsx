@@ -1,9 +1,12 @@
 // import Link from "next/link";
 import { motion } from "motion/react";
 import { slide, scale } from "@/lib/constants/nav";
-import { useTransitionState } from "next-transition-router";
+
 import { CustomLinkProps } from "@/lib/type";
-import { Link as TransitionLink } from "next-transition-router";
+import {
+  Link as TransitionLink,
+  useTransitionState,
+} from "next-transition-router";
 import {
   UseTransitionTextState,
   UseMenuState,

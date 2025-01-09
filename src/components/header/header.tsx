@@ -12,6 +12,8 @@ import {
 } from "@/components/provider/contextProvider";
 import { useWindowDimensions } from "@/lib/hooks/useWindowDimensions";
 import { Link as TransitionLink } from "next-transition-router";
+// import Link from "next/link";
+
 export default function Header() {
   const { menuIsActive, setMenuIsActive } = UseMenuState();
   const { setTransitionTextContent } = UseTransitionTextState();
