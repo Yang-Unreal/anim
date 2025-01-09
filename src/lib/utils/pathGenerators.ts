@@ -6,7 +6,7 @@ export const generatePaths = ({
 }: WindowDimensions): PathsOutput => {
   const mid = width / 2;
   const sideHeight = height + 300;
-  const totalHeight = height + 600;
+  const totalHeight = height + 500;
   return {
     initial: `
     M0 300 

@@ -27,7 +27,6 @@ export default function CustomLink({
       }}
       onClick={() => {
         setTransitionTextContent(title);
-        setMenuIsActive(false);
       }}
       custom={index}
       variants={slide}
@@ -43,6 +42,7 @@ export default function CustomLink({
       <Link
         href={href}
         className={`${isTransitionCompleted ? "" : "pointer-events-none"}`}
+        onClick={() => setMenuIsActive(false)}
       >
         {title}
       </Link>

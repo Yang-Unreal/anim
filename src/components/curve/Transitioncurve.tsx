@@ -34,16 +34,16 @@ export default function CurveTransition({ children }: ChildProps) {
         animate(
           svgRef.current,
           { y: ["100vh", 0], visibility: ["visible"] },
-          { duration: 0.4, ease: [0.7, 0, 0.84, 0] }
+          { duration: 0.5, ease: [0.7, 0, 0.84, 0] }
         ),
         animate(
           pathRef.current,
           { d: [paths.initial, paths.leave] },
-          { duration: 0.4, ease: [0.7, 0, 0.84, 0] }
+          { duration: 0.5, ease: [0.7, 0, 0.84, 0] }
         ),
         animate(
           paraRef.current,
-          { opacity: [0, 1], top: ["60%", "50%"] },
+          { opacity: [0, 1], top: ["70%", "50%"] },
           { delay: 0.4, duration: 0.3, ease: [0.34, 1.56, 0.64, 1] }
         ),
       ]).then(next);
@@ -63,29 +63,29 @@ export default function CurveTransition({ children }: ChildProps) {
           svgRef.current,
           { y: [0, "-100vh"], visibility: "hidden" },
           {
-            duration: 0.9,
+            duration: 0.7,
             ease: [1, 0, 0.35, 1],
             visibility: {
               duration: 0,
-              delay: 0.9,
+              delay: 0.7,
             },
           }
         ),
         animate(
           pathRef.current,
           { d: paths.enter },
-          { duration: 0.9, ease: [0.45, 0, 0.55, 1] }
+          { duration: 0.7, ease: [0.45, 0, 0.55, 1] }
         ),
         animate(
           paraRef.current,
           { opacity: [1, 0], top: ["50%", "-10%"] },
           {
             opacity: {
-              duration: 0.7,
+              duration: 0.6,
               ease: [0.45, 0, 0.55, 1],
             },
-            duration: 0.9,
-            ease: [0.45, 0, 0.55, 1],
+            duration: 0.7,
+            ease: [1, 0, 0.35, 1],
           }
         ),
       ]).then(next);

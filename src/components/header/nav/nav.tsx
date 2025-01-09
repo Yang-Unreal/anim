@@ -18,7 +18,7 @@ export default function Nav() {
       initial="initial"
       animate="enter"
       exit="exit"
-      className="fixed right-0 top-0 h-screen bg-[#292929] text-white"
+      className="fixed right-0 top-0 h-screen bg-[#292929] text-white z-[9]"
     >
       <div className="flex h-full flex-col justify-between box-border p-24">
         <NavContent
