@@ -76,44 +76,38 @@ export default function Header() {
           </div>
         </Link>
         <div className="flex items-center text-[18px]">
-          <div className="header-nav-link group">
-            <Link
-              href={"/work"}
-              onClick={() => {
-                setTransitionTextContent("Work");
-              }}
-              className={transitionCursor}
-            >
-              Work
-            </Link>
+          <Link
+            href={"/work"}
+            onClick={() => {
+              setTransitionTextContent("Work");
+            }}
+            className={`header-nav-link group ${transitionCursor}`}
+          >
+            <p>Work</p>
             <div className="indicator"></div>
-          </div>
+          </Link>
 
-          <div className="header-nav-link group">
-            <Link
-              href={"/about"}
-              onClick={() => {
-                setTransitionTextContent("About");
-              }}
-              className={transitionCursor}
-            >
-              About
-            </Link>
+          <Link
+            href={"/about"}
+            onClick={() => {
+              setTransitionTextContent("About");
+            }}
+            className={`header-nav-link group ${transitionCursor}`}
+          >
+            <p>About</p>
             <div className="indicator"></div>
-          </div>
+          </Link>
 
-          <div className="header-nav-link group">
-            <Link
-              href={"/contact"}
-              onClick={() => {
-                setTransitionTextContent("Contact");
-              }}
-              className={transitionCursor}
-            >
-              Contact
-            </Link>
-            <div className="indicator "></div>
-          </div>
+          <Link
+            href={"/contact"}
+            onClick={() => {
+              setTransitionTextContent("Contact");
+            }}
+            className={`header-nav-link group ${transitionCursor}`}
+          >
+            <p>Contact</p>
+            <div className="indicator"></div>
+          </Link>
         </div>
       </div>
       <MenuButton
