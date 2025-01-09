@@ -22,14 +22,13 @@ export default function Description() {
             return (
               <span
                 key={index}
-                className="relative overflow-hidden inline-flex mr-[3px]"
+                className="relative overflow-hidden inline-flex mr-[6px]"
               >
                 <motion.span
                   variants={slideUp}
                   custom={index}
                   animate={isInView ? "open" : "closed"}
                   key={index}
-                  className="mr-[3px]"
                 >
                   {word}
                 </motion.span>
