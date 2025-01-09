@@ -1,8 +1,8 @@
 export default function Work() {
   return (
     <>
-      <main className="h-screen flex items-center  flex-col gap-3">
-        <h1 className="text-4xl font-bold">Work</h1>
+      <main className="h-screen w-screen flex items-center justify-center ">
+        <h1 className="text-4xl font-bold translate-y-[-50%]">Work</h1>
       </main>
       <div className="w-full h-screen bg-orange-500"></div>
     </>

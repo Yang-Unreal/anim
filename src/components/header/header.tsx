@@ -6,12 +6,15 @@ import Nav from "@/components/header/nav/nav";
 import { MenuButton } from "./MenuButton";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { UseMenuState } from "../provider/contextProvider";
+import {
+  UseTransitionTextState,
+  UseMenuState,
+} from "@/components/provider/contextProvider";
 import { useWindowDimensions } from "@/lib/hooks/useWindowDimensions";
-
+import { Link as TransitionLink } from "next-transition-router";
 export default function Header() {
   const { menuIsActive, setMenuIsActive } = UseMenuState();
-
+  const { setTransitionTextContent } = UseTransitionTextState();
   const button = useRef<HTMLButtonElement>(null!);
   const height = useWindowDimensions().height;
 
@@ -44,7 +47,13 @@ export default function Header() {
   return (
     <>
       <div className="flex absolute z-20 top-0 left-0 w-full items-center justify-between px-[40px] py-5 text-black box-border text-lg">
-        <div className="flex cursor-pointer group ">
+        <TransitionLink
+          className="flex cursor-pointer group"
+          href={"/"}
+          onClick={() => {
+            setTransitionTextContent("Home");
+          }}
+        >
           <p className=" transition-logo group-hover:rotate-[360deg] origin-center">
             ©
           </p>
@@ -59,20 +68,41 @@ export default function Header() {
               Snellenberg
             </p>
           </div>
-        </div>
+        </TransitionLink>
         <div className="flex items-center text-[18px]">
           <div className="header-nav-link group">
-            <a href={"/work"}>Work</a>
+            <TransitionLink
+              href={"/work"}
+              onClick={() => {
+                setTransitionTextContent("Work");
+              }}
+            >
+              Work
+            </TransitionLink>
             <div className="indicator"></div>
           </div>
 
           <div className="header-nav-link group">
-            <a href={"/about"}>About</a>
+            <TransitionLink
+              href={"/about"}
+              onClick={() => {
+                setTransitionTextContent("About");
+              }}
+            >
+              About
+            </TransitionLink>
             <div className="indicator"></div>
           </div>
 
           <div className="header-nav-link group">
-            <a>Contact</a>
+            <TransitionLink
+              href={"/contact"}
+              onClick={() => {
+                setTransitionTextContent("Contact");
+              }}
+            >
+              Contact
+            </TransitionLink>
             <div className="indicator "></div>
           </div>
         </div>
