@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { TransitionRouter } from "next-transition-router";
+import { TransitionRouter } from "@/lib/utils/pageTransition/index";
 import { animate } from "motion/react"; // Ensure you have motion installed
 import { Debug } from "../debug";
 export default function StairTransition({

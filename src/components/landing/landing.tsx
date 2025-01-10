@@ -14,9 +14,9 @@ export default function Landing() {
         <Image
           src="/images/background.jpg"
           alt="background"
-          layout="fill" // Make the image fill the container
-          objectFit="cover" // Maintain aspect ratio, crop if necessary
-          quality={100}
+          height={1080}
+          width={1920}
+          className="object-cover h-auto"
         />
       </div>
       <div className="absolute top-0 left-0 w-full h-full">

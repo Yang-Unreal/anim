@@ -11,7 +11,8 @@ import {
   UseMenuState,
 } from "@/components/provider/contextProvider";
 import { useWindowDimensions } from "@/lib/hooks/useWindowDimensions";
-import { useTransitionState } from "next-transition-router";
+
+import { useTransitionState } from "@/lib/utils/pageTransition/index";
 import Link from "next/link";
 
 export default function Header() {

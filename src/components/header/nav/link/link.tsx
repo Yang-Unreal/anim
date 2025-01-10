@@ -1,18 +1,24 @@
-// import Link from "next/link";
+"use client";
+
 import { motion } from "motion/react";
 import { slide, scale } from "@/lib/constants/nav";
 import Link from "next/link";
 import { CustomLinkProps } from "@/lib/type";
-import { useTransitionState } from "next-transition-router";
+
+import { useTransitionState } from "@/lib/utils/pageTransition/index";
 import {
   UseTransitionTextState,
   UseMenuState,
 } from "@/components/provider/contextProvider";
+import { usePathname } from "next/navigation";
+
 export default function CustomLink({
   data,
   isActive,
   setSelectedIndicator,
 }: CustomLinkProps) {
+  const pathname = usePathname();
+
   const { setTransitionTextContent } = UseTransitionTextState();
   const { setMenuIsActive } = UseMenuState();
   const { title, href, index } = data;
@@ -42,6 +48,9 @@ export default function CustomLink({
         onClick={() => {
           setMenuIsActive(false);
           setTransitionTextContent(title);
+          if (href === pathname) {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }
         }}
       >
         {title}

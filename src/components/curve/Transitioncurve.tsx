@@ -1,7 +1,8 @@
 "use client";
 
 import { useRef, useCallback } from "react";
-import { TransitionRouter } from "next-transition-router";
+// import { TransitionRouter } from "next-transition-router";
+import { TransitionRouter } from "@/lib/utils/pageTransition/index";
 import { animate } from "motion/react";
 import { useWindowDimensions } from "@/lib/hooks/useWindowDimensions";
 import { generatePaths } from "@/lib/utils/pathGenerators";
