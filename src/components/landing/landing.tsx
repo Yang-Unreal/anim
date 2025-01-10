@@ -3,9 +3,11 @@
 import Image from "next/image";
 import InfiniteText from "@/components/infiniteText/infiniteText";
 import { motion, useScroll, useTransform } from "motion/react";
-
+import { useWindowDimensions } from "@/lib/hooks/useWindowDimensions";
 // import { useRef } from "react";
 export default function Landing() {
+  const { width, height } = useWindowDimensions();
+
   const { scrollYProgress } = useScroll();
   const Y = useTransform(scrollYProgress, [0, 1], [0, -500]);
   return (
@@ -14,8 +16,8 @@ export default function Landing() {
         <Image
           src="/images/background.jpg"
           alt="background"
-          height={1080}
-          width={1920}
+          height={height}
+          width={width}
           className="object-cover h-auto"
         />
       </div>
