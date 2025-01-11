@@ -12,8 +12,11 @@ import {
 } from "@/components/provider/contextProvider";
 import { useWindowDimensions } from "@/lib/hooks/useWindowDimensions";
 
-import { useTransitionState } from "@/lib/utils/pageTransition/index";
-import Link from "next/link";
+// import { useTransitionState } from "@/lib/utils/pageTransition/index";
+import { useTransitionState } from "@/lib/utils/pageTransition/transition";
+
+import { Link } from "@/lib/utils/pageTransition/transition";
+// import Link from "next/link";
 
 export default function Header() {
   const { menuIsActive, setMenuIsActive } = UseMenuState();

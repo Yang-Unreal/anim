@@ -2,10 +2,12 @@
 
 import { motion } from "motion/react";
 import { slide, scale } from "@/lib/constants/nav";
-import Link from "next/link";
+// import Link from "next/link";
 import { CustomLinkProps } from "@/lib/type";
 
-import { useTransitionState } from "@/lib/utils/pageTransition/index";
+// import { useTransitionState } from "@/lib/utils/pageTransition/index";
+import { useTransitionState } from "@/lib/utils/pageTransition/transition";
+import { Link } from "@/lib/utils/pageTransition/transition";
 import {
   UseTransitionTextState,
   UseMenuState,

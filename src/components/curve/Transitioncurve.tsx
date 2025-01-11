@@ -1,8 +1,9 @@
 "use client";
 
 import { useRef, useCallback } from "react";
-// import { TransitionRouter } from "next-transition-router";
-import { TransitionRouter } from "@/lib/utils/pageTransition/index";
+
+// import { TransitionRouter } from "@/lib/utils/pageTransition/index";
+import { TransitionRouter } from "@/lib/utils/pageTransition/transition";
 import { animate } from "motion/react";
 import { useWindowDimensions } from "@/lib/hooks/useWindowDimensions";
 import { generatePaths } from "@/lib/utils/pathGenerators";
@@ -91,7 +92,7 @@ export default function CurveTransition({ children }: ChildProps) {
   );
   return (
     <TransitionRouter
-      auto={true}
+      auto={false}
       leave={handleLeaveAnimation}
       enter={handleEnterAnimation}
     >

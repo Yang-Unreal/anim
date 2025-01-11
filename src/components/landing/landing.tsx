@@ -4,7 +4,7 @@ import Image from "next/image";
 import InfiniteText from "@/components/infiniteText/infiniteText";
 import { motion, useScroll, useTransform } from "motion/react";
 import { useWindowDimensions } from "@/lib/hooks/useWindowDimensions";
-// import { useRef } from "react";
+
 export default function Landing() {
   const { width, height } = useWindowDimensions();
 
