@@ -46,7 +46,9 @@ export default function CustomLink({
       />
       <Link
         href={href}
-        className={`${isTransitionCompleted ? "" : "pointer-events-none"}`}
+        className={`${
+          isTransitionCompleted ? "" : "pointer-events-none"
+        } font-formula`}
         onClick={() => {
           setMenuIsActive(false);
           setTransitionTextContent(title);

@@ -56,60 +56,63 @@ export default function Header() {
 
   return (
     <>
-      <div className="flex absolute z-20 top-0 left-0 w-full items-center justify-between px-[40px] py-5 text-black box-border text-lg ">
+      <div className="flex absolute z-20 top-0 left-0 w-full items-center justify-between px-[40px] py-5 text-black box-border text-[20px] ">
         <Link
-          className={`flex cursor-pointer group ${transitionCursor}`}
+          className={`flex top-0 cursor-pointer group  ${transitionCursor} -translate-y-[30%]`}
           href={"/"}
           onClick={() => {
             setTransitionTextContent("Home");
           }}
         >
-          <p className=" transition-logo group-hover:rotate-[360deg] origin-center">
+          <p className=" transition-logo -translate-y-[7%] group-hover:rotate-[360deg] origin-center ">
             ©
           </p>
-          <div className="flex relative overflow-hidden whitespace-nowrap ml-[5px] transition-logo group-hover:pr-[40px] ">
-            <p className="relative transition-logo group-hover:-translate-x-full ">
-              Code by
+          <div className="flex w-[50%] relative overflow-hidden whitespace-nowrap ml-[5px] transition-logo group-hover:pr-[70%]  D  font-formula">
+            {/* <p className="pl-[0.4em] relative transition-logo group-hover:-translate-x-[110%]  ">
+              CODE BY
             </p>
-            <p className="relative transition-logo pl-[0.3em] group-hover:-translate-x-[72px] ">
-              Dennis
+            <p className="relative transition-logo pl-[0.2em] group-hover:-translate-x-[110%] ">
+              DENNIS
             </p>
-            <p className="absolute left-[120px] transition-logo pl-[0.8em] group-hover:-translate-x-[65px] ">
-              Snellenberg
+            <p className="absolute left-[150px] transition-logo pl-[0.2em] group-hover:-translate-x-[97%] ">
+              SNELLENBERG
+            </p> */}
+            <p className="transition-logo group-hover:-translate-x-[29%] ">
+              CODE BY DENNIS SNELLENBERG
             </p>
           </div>
         </Link>
-        <div className="flex items-center text-[18px]">
+        <div className="flex items-center text-[28px] font-formula">
           <Link
             href={"/work"}
             onClick={() => {
-              setTransitionTextContent("Work");
+              setTransitionTextContent("WORK");
             }}
-            className={`header-nav-link group ${transitionCursor}`}
+            className={`header-nav-link group ${transitionCursor} `}
           >
-            <p>Work</p>
+            <p>WORK</p>
             <div className="indicator"></div>
           </Link>
 
           <Link
             href={"/about"}
             onClick={() => {
-              setTransitionTextContent("About");
+              setTransitionTextContent("ABOUT");
             }}
             className={`header-nav-link group ${transitionCursor}`}
           >
-            <p>About</p>
+            <p>ABOUT</p>
             <div className="indicator"></div>
           </Link>
 
           <Link
             href={"/contact"}
             onClick={() => {
-              setTransitionTextContent("Contact");
+              setTransitionTextContent("CONTACT");
             }}
             className={`header-nav-link group ${transitionCursor}`}
           >
-            <p>Contact</p>
+            <p>CONTACT</p>
             <div className="indicator"></div>
           </Link>
         </div>

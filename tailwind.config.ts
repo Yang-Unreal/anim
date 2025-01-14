@@ -12,6 +12,9 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      fontFamily: {
+        formula: ["PPFormula-CondensedBlack", "sans-serif"], // 'My Font' matches the font-family in @font-face
+      },
     },
   },
   plugins: [],

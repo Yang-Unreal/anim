@@ -1,6 +1,6 @@
 "use client";
 
-import { useTransitionState } from "next-transition-router";
+import { useTransitionState } from "@/lib/utils/pageTransition/transition";
 
 export function Debug() {
   const { stage } = useTransitionState();

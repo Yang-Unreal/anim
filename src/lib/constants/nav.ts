@@ -27,8 +27,8 @@ export const scale = {
 };
 
 export const NAVIGATION_ITEMS: NavItem[] = [
-  { title: "Home", href: "/" },
-  { title: "Work", href: "/work" },
-  { title: "About", href: "/about" },
-  { title: "Contact", href: "/contact" },
+  { title: "HOME", href: "/" },
+  { title: "WORK", href: "/work" },
+  { title: "ABOUT", href: "/about" },
+  { title: "CONTACT", href: "/contact" },
 ];

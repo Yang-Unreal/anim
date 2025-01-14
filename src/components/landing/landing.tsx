@@ -25,7 +25,7 @@ export default function Landing() {
         <InfiniteText />
         <motion.div
           style={{ y: Y }}
-          className="absolute top-[20%] left-[65%] text-white text-[24px] font-light"
+          className="absolute top-[20%] left-[65%] text-white text-[24px] font-light font-formula"
         >
           <svg
             width="9"
@@ -40,8 +40,8 @@ export default function Landing() {
               fill="white"
             />
           </svg>
-          <p>Freelance</p>
-          <p>Designer & Developer</p>
+          <p>FREELANCE</p>
+          <p>DESIGNER & DEVELOPER</p>
         </motion.div>
       </div>
     </div>

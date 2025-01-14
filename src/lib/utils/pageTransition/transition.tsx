@@ -89,12 +89,12 @@ const isModifiedEvent = (event: MouseEvent | React.MouseEvent): boolean => {
 const getUrlAsString = (url: Url): string =>
   typeof url === "string" ? url : format(url);
 
-export function TransitionRouter({
+export const TransitionRouter = ({
   children,
   leave = async (next) => next(),
   enter = async (next) => next(),
   auto = false,
-}: TransitionRouterProps) {
+}: TransitionRouterProps) => {
   const router = useRouter();
   const pathname = usePathname();
   const [stage, setStage] = useState<Stage>("none");
@@ -106,6 +106,7 @@ export function TransitionRouter({
 
   const navigate: NavigateProps = useCallback(
     async (href, pathname, method = "push", options?) => {
+      // Clear any existing enter cleanup
       if (typeof enterRef.current === "function") {
         enterRef.current();
         enterRef.current = null;
@@ -135,14 +136,14 @@ export function TransitionRouter({
         const leaveComplete = new Promise<void>((resolve) => {
           completeLeaveRef.current = resolve;
         });
-
-        leaveRef.current = (await leave(performNavigation, pathname, href)) as
-          | (() => void)
-          | null;
+        // Executes leave callback and stores cleanup
+        leaveRef.current = (await Promise.resolve(
+          leave(performNavigation, pathname, href)
+        )) as (() => void) | null;
 
         if (isSamePage) {
           await leaveComplete;
-
+          // Execute leave cleanup for same-page transitions
           if (typeof leaveRef.current === "function") {
             leaveRef.current();
             leaveRef.current = null;
@@ -199,6 +200,7 @@ export function TransitionRouter({
   useEffect(() => {
     if (stage === "entering") {
       const runEnter = async () => {
+        // Store new cleanup function from enter callback
         try {
           enterRef.current = (await Promise.resolve(
             enter(() => {
@@ -216,8 +218,10 @@ export function TransitionRouter({
     }
   }, [stage, enter]);
 
+  // Component unmounts during navigation
   useEffect(() => {
     return () => {
+      // Execute leave cleanup when leaving page
       if (stage === "leaving" && !isSamePageRef.current) {
         if (typeof leaveRef.current === "function") {
           leaveRef.current();
@@ -242,7 +246,7 @@ export function TransitionRouter({
       {children}
     </TransitionRouterContext.Provider>
   );
-}
+};
 
 export const useTransitionState = (): TransitionRouterContextType =>
   useContext(TransitionRouterContext);
