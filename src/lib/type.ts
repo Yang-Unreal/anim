@@ -1,5 +1,8 @@
 import { ReactNode } from "react";
 import { NavigateOptions } from "next/dist/shared/lib/app-router-context.shared-runtime";
+import { UrlObject } from "url";
+import { LinkProps } from "next/link";
+
 export interface TransitionRoutes {
   "/": string;
   "/about": string;
@@ -78,7 +81,7 @@ export interface TransitionRouterProps {
   enter?: TransitionCallback;
   auto?: boolean;
 }
-type NavigateProps = (
+export type NavigateProps = (
   href: string,
   pathname: string,
   method?: "push" | "replace" | "back",
@@ -88,4 +91,16 @@ export interface TransitionRouterContextType {
   stage: Stage;
   navigate: NavigateProps;
   isReady: boolean;
+}
+
+export type Url = string | UrlObject;
+
+export interface TransitionLinkProps extends Omit<LinkProps, "href"> {
+  href: Url;
+  as?: Url;
+  replace?: boolean;
+  scroll?: boolean;
+  onClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void;
+  children: ReactNode;
+  className?: string;
 }
