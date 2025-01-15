@@ -1,6 +1,6 @@
 "use client";
 
-import { useTransitionState } from "next-transition-router";
+import { useTransitionState } from "@/lib/hooks/useTransitionState";
 import { motion } from "motion/react";
 
 export function Box({ color }: { color: string }) {
