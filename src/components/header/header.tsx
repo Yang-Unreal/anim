@@ -9,13 +9,14 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
   UseTransitionTextState,
   UseMenuState,
-} from "@/components/provider/contextProvider";
+} from "@/components/provider/transitionTextProvider";
 import { useWindowDimensions } from "@/lib/hooks/useWindowDimensions";
 
-// import { useTransitionState } from "@/lib/utils/pageTransition/index";
-import { useTransitionState } from "@/lib/utils/pageTransition/transition";
+// import { useTransitionState } from "@/lib/utils/pageTransition/transition";
+import { useTransitionState } from "@/lib/hooks/useTransitionState";
+// import { Link } from "@/lib/utils/pageTransition/transition";
 
-import { Link } from "@/lib/utils/pageTransition/transition";
+import { Link } from "@/components/customLink/customLink";
 // import Link from "next/link";
 
 export default function Header() {

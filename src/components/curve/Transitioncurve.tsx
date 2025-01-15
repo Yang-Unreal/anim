@@ -2,16 +2,15 @@
 
 import { useRef, useCallback } from "react";
 
-// import { TransitionRouter } from "@/lib/utils/pageTransition/index";
-import { TransitionRouter } from "@/lib/utils/pageTransition/transition";
-
+// import { TransitionRouter } from "@/lib/utils/pageTransition/transition";
+import { TransitionRouter } from "@/components/provider/transitionContextProvider";
 import { animate } from "motion/react";
 import { useWindowDimensions } from "@/lib/hooks/useWindowDimensions";
 import { generatePaths } from "@/lib/utils/pathGenerators";
 import { TransitionText } from "./transitionText";
 import { TransitionPath } from "@/components/curve/TransitionPath";
 import type { ChildProps } from "@/lib/type";
-import { TransitionProvider } from "@/components/provider/contextProvider";
+import { TransitionProvider } from "@/components/provider/transitionTextProvider";
 
 export default function CurveTransition({ children }: ChildProps) {
   const svgRef = useRef<SVGSVGElement>(null!);

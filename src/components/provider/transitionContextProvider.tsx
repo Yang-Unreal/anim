@@ -1,93 +1,31 @@
 "use client";
 
 import {
-  useEffect,
+  createContext,
   useState,
-  useCallback,
-  useMemo,
-  useContext,
   useRef,
   useTransition,
-  createContext,
+  useCallback,
+  useEffect,
+  useMemo,
 } from "react";
+
 import { useRouter, usePathname } from "next/navigation";
-import { format } from "url";
-import delegate from "delegate-it";
-import { LinkProps } from "next/link";
-import NextLink from "next/link";
-import { NavigateOptions } from "next/dist/shared/lib/app-router-context.shared-runtime";
-import { UrlObject } from "url";
+import delegate, { DelegateEvent } from "delegate-it";
+import { isModifiedEvent } from "@/lib/utils/isModifiedEvent";
+import type {
+  Stage,
+  TransitionRouterProps,
+  TransitionRouterContextType,
+  NavigateProps,
+} from "@/lib/type";
 
-type Stage = "leaving" | "entering" | "none";
-
-type Url = string | UrlObject;
-
-type TransitionCallback = (
-  next: () => void,
-  from?: string,
-  to?: string
-) => Promise<(() => void) | void> | ((() => void) | void);
-
-type NavigateProps = (
-  href: string,
-  pathname: string,
-  method?: "push" | "replace" | "back",
-  options?: NavigateOptions
-) => void;
-
-interface TransitionRouterContextType {
-  stage: Stage;
-  navigate: NavigateProps;
-  isReady: boolean;
-}
-
-interface TransitionLinkProps extends Omit<LinkProps, "href"> {
-  href: Url;
-  as?: Url;
-  replace?: boolean;
-  scroll?: boolean;
-  onClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void;
-  children: React.ReactNode;
-  className?: string;
-}
-
-interface TransitionRouterProps {
-  children: React.ReactNode;
-  leave?: TransitionCallback;
-  enter?: TransitionCallback;
-  auto?: boolean;
-}
-
-interface DelegateEvent extends MouseEvent {
-  delegateTarget: HTMLElement;
-}
-
-const TransitionRouterContext = createContext<TransitionRouterContextType>({
-  stage: "none",
-  navigate: () => {},
-  isReady: false,
-});
-
-const isModifiedEvent = (event: MouseEvent | React.MouseEvent): boolean => {
-  const eventTarget =
-    "delegateTarget" in event
-      ? (event as DelegateEvent).delegateTarget
-      : (event.currentTarget as HTMLElement);
-
-  const target = eventTarget.getAttribute("target");
-
-  return (
-    (target && target !== "_self") ||
-    event.metaKey ||
-    event.ctrlKey ||
-    event.shiftKey ||
-    event.altKey ||
-    event.button === 1
-  );
-};
-
-const getUrlAsString = (url: Url): string =>
-  typeof url === "string" ? url : format(url);
+export const TransitionRouterContext =
+  createContext<TransitionRouterContextType>({
+    stage: "none",
+    navigate: () => {},
+    isReady: false,
+  });
 
 export const TransitionRouter = ({
   children,
@@ -120,16 +58,11 @@ export const TransitionRouter = ({
       setStage("leaving");
 
       const performNavigation = () => {
-        if (!isSamePage) {
-          startTransition(() => {
-            router[method](href, options);
-          });
-          return Promise.resolve();
+        if (!isSamePageRef.current) {
+          startTransition(() => router[method](href, options));
+        } else {
+          completeLeaveRef.current?.();
         }
-        if (completeLeaveRef.current) {
-          completeLeaveRef.current();
-        }
-        return Promise.resolve();
       };
 
       try {
@@ -141,7 +74,7 @@ export const TransitionRouter = ({
           leave(performNavigation, pathname, href)
         )) as (() => void) | null;
 
-        if (isSamePage) {
+        if (isSamePageRef.current) {
           await leaveComplete;
           // Execute leave cleanup for same-page transitions
           if (typeof leaveRef.current === "function") {
@@ -160,7 +93,7 @@ export const TransitionRouter = ({
   );
 
   const handleClick = useCallback(
-    (event: DelegateEvent) => {
+    (event: DelegateEvent<MouseEvent>) => {
       const anchor = event.delegateTarget as HTMLAnchorElement;
       const href = anchor?.getAttribute("href");
       const ignore = anchor?.getAttribute("data-transition-ignore");
@@ -245,81 +178,5 @@ export const TransitionRouter = ({
     <TransitionRouterContext.Provider value={value}>
       {children}
     </TransitionRouterContext.Provider>
-  );
-};
-
-export const useTransitionState = (): TransitionRouterContextType =>
-  useContext(TransitionRouterContext);
-
-export const useTransitionRouter = () => {
-  const router = useRouter();
-  const pathname = usePathname();
-  const { navigate } = useTransitionState();
-
-  const push = useCallback(
-    (href: Url, options?: NavigateOptions) => {
-      navigate(getUrlAsString(href), pathname, "push", options);
-    },
-    [pathname, navigate]
-  );
-
-  const replace = useCallback(
-    (href: Url, options?: NavigateOptions) => {
-      navigate(getUrlAsString(href), pathname, "replace", options);
-    },
-    [pathname, navigate]
-  );
-
-  const back = useCallback(() => {
-    navigate(pathname, "back");
-  }, [pathname, navigate]);
-
-  return useMemo(
-    () => ({
-      ...router,
-      push,
-      replace,
-      back,
-    }),
-    [router, push, replace, back]
-  );
-};
-
-export const Link = ({
-  href,
-  as,
-  replace,
-  scroll,
-  onClick,
-  children,
-  className,
-  ...restProps
-}: TransitionLinkProps) => {
-  const router = useTransitionRouter();
-
-  const handleClick = useCallback(
-    (e: React.MouseEvent<HTMLAnchorElement>) => {
-      if (onClick) onClick(e);
-
-      if (!e.defaultPrevented && !isModifiedEvent(e)) {
-        e.preventDefault();
-        const navigate = replace ? router.replace : router.push;
-        navigate(as || href, {
-          scroll: scroll ?? true,
-        });
-      }
-    },
-    [onClick, href, as, replace, scroll, router]
-  );
-
-  return (
-    <NextLink
-      {...restProps}
-      href={href}
-      onClick={handleClick}
-      className={className}
-    >
-      {children}
-    </NextLink>
   );
 };

@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+import { NavigateOptions } from "next/dist/shared/lib/app-router-context.shared-runtime";
 export interface TransitionRoutes {
   "/": string;
   "/about": string;
@@ -59,4 +61,31 @@ export interface NavContentProps {
   selectedIndicator: string;
   setSelectedIndicator: (href: string) => void;
   pathname: string;
+}
+
+//Transition types
+export type Stage = "leaving" | "entering" | "none";
+
+export type TransitionCallback = (
+  next: () => void,
+  from?: string,
+  to?: string
+) => Promise<(() => void) | void> | ((() => void) | void);
+
+export interface TransitionRouterProps {
+  children: ReactNode;
+  leave?: TransitionCallback;
+  enter?: TransitionCallback;
+  auto?: boolean;
+}
+type NavigateProps = (
+  href: string,
+  pathname: string,
+  method?: "push" | "replace" | "back",
+  options?: NavigateOptions
+) => void;
+export interface TransitionRouterContextType {
+  stage: Stage;
+  navigate: NavigateProps;
+  isReady: boolean;
 }

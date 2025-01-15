@@ -4,7 +4,7 @@ import "./globals.css";
 import { ReactLenis } from "@/lib/utils/lenis";
 import CurveTransition from "@/components/curve/Transitioncurve";
 import Header from "@/components/header/header";
-import { MenuProvider } from "@/components/provider/contextProvider";
+import { MenuProvider } from "@/components/provider/transitionTextProvider";
 import { Debug } from "@/components/debug";
 const geistSans = Geist({
   variable: "--font-geist-sans",

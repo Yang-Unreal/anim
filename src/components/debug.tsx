@@ -1,6 +1,6 @@
 "use client";
 
-import { useTransitionState } from "@/lib/utils/pageTransition/transition";
+import { useTransitionState } from "@/lib/hooks/useTransitionState";
 
 export function Debug() {
   const { stage } = useTransitionState();

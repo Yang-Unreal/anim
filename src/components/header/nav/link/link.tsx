@@ -5,13 +5,14 @@ import { slide, scale } from "@/lib/constants/nav";
 // import Link from "next/link";
 import { CustomLinkProps } from "@/lib/type";
 
-// import { useTransitionState } from "@/lib/utils/pageTransition/index";
-import { useTransitionState } from "@/lib/utils/pageTransition/transition";
-import { Link } from "@/lib/utils/pageTransition/transition";
+// import { useTransitionState } from "@/lib/utils/pageTransition/transition";
+import { useTransitionState } from "@/lib/hooks/useTransitionState";
+
+import { Link } from "@/components/customLink/customLink";
 import {
   UseTransitionTextState,
   UseMenuState,
-} from "@/components/provider/contextProvider";
+} from "@/components/provider/transitionTextProvider";
 import { usePathname } from "next/navigation";
 
 export default function CustomLink({

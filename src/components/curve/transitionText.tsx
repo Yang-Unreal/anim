@@ -1,7 +1,7 @@
 import { memo } from "react";
 
 import type { TransitionTextProps } from "@/lib/type";
-import { UseTransitionTextState } from "@/components/provider/contextProvider";
+import { UseTransitionTextState } from "@/components/provider/transitionTextProvider";
 export const TransitionText = memo(function TransitionText({
   textRef,
 }: TransitionTextProps) {
