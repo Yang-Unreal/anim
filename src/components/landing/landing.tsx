@@ -4,15 +4,21 @@ import Image from "next/image";
 import InfiniteText from "@/components/infiniteText/infiniteText";
 import { motion, useScroll, useTransform } from "motion/react";
 import { useWindowDimensions } from "@/lib/hooks/useWindowDimensions";
+import { useRef } from "react";
 
 export default function Landing() {
   const { width, height } = useWindowDimensions();
+  const landingRef = useRef<HTMLDivElement>(null!);
+  const { scrollYProgress } = useScroll({
+    target: landingRef,
+    offset: ["start start", "end start"],
+  });
 
-  const { scrollYProgress } = useScroll();
   const Y = useTransform(scrollYProgress, [0, 1], [0, -500]);
+
   return (
-    <div className="h-screen flex relative">
-      <div className="relative w-full h-full flex overflow-hidden">
+    <div ref={landingRef} className=" flex relative">
+      <div className="relative w-full h-screen flex overflow-hidden">
         <Image
           src="/images/background.jpg"
           alt="background"

@@ -7,7 +7,7 @@ interface TransitionContextType {
   setTransitionTextContent: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const TransitionContext = createContext<TransitionContextType>({
+const TransitionTextContext = createContext<TransitionContextType>({
   transitionTextContent: "",
   setTransitionTextContent: () => {},
 });
@@ -17,16 +17,16 @@ export function TransitionProvider({ children }: ChildProps) {
     useState<string>("");
 
   return (
-    <TransitionContext.Provider
+    <TransitionTextContext.Provider
       value={{ transitionTextContent, setTransitionTextContent }}
     >
       {children}
-    </TransitionContext.Provider>
+    </TransitionTextContext.Provider>
   );
 }
 
 export function UseTransitionTextState() {
-  const context = useContext(TransitionContext);
+  const context = useContext(TransitionTextContext);
   if (!context) {
     throw new Error("useTransitionState must be used within a MyProvider");
   }

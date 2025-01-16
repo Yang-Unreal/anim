@@ -46,7 +46,7 @@ export default function Description() {
         </motion.p>
         <motion.div
           style={{ y: Y }}
-          className="top-[200%] left-[calc(100%-270px)] w-[220px] h-[220px] bg-[#1C1D20] text-white rounded-full absolute flex items-center justify-center cursor-pointer"
+          className="top-[170%] left-[calc(100%-270px)] w-[220px] h-[220px] bg-[#1C1D20] text-white rounded-full absolute flex items-center justify-center cursor-pointer z-[2]"
         >
           <p className="m-0 text-[20px] font-light relative">About me</p>
         </motion.div>

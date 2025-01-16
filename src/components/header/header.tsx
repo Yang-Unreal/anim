@@ -11,10 +11,7 @@ import {
   UseMenuState,
 } from "@/components/provider/transitionTextProvider";
 import { useWindowDimensions } from "@/lib/hooks/useWindowDimensions";
-
-// import { useTransitionState } from "@/lib/utils/pageTransition/transition";
 import { useTransitionState } from "@/lib/hooks/useTransitionState";
-// import { Link } from "@/lib/utils/pageTransition/transition";
 
 import { Link } from "@/components/customLink/customLink";
 // import Link from "next/link";
@@ -57,7 +54,7 @@ export default function Header() {
 
   return (
     <>
-      <div className="flex absolute z-20 top-0 left-0 w-full items-center justify-between px-[40px] py-5 text-black box-border text-[20px] ">
+      <div className="flex absolute z-[31] top-0 left-0 w-full items-center justify-between px-[40px] py-5 text-black box-border text-[20px] ">
         <Link
           className={`flex top-0 cursor-pointer group  ${transitionCursor} -translate-y-[30%]`}
           href={"/"}
@@ -69,15 +66,6 @@ export default function Header() {
             ©
           </p>
           <div className="flex w-[50%] relative overflow-hidden whitespace-nowrap ml-[5px] transition-logo group-hover:pr-[70%]  D  font-formula">
-            {/* <p className="pl-[0.4em] relative transition-logo group-hover:-translate-x-[110%]  ">
-              CODE BY
-            </p>
-            <p className="relative transition-logo pl-[0.2em] group-hover:-translate-x-[110%] ">
-              DENNIS
-            </p>
-            <p className="absolute left-[150px] transition-logo pl-[0.2em] group-hover:-translate-x-[97%] ">
-              SNELLENBERG
-            </p> */}
             <p className="transition-logo group-hover:-translate-x-[29%] ">
               CODE BY DENNIS SNELLENBERG
             </p>
