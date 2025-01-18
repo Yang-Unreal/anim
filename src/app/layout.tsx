@@ -5,7 +5,8 @@ import { ReactLenis } from "@/lib/utils/lenis";
 import CurveTransition from "@/components/curve/Transitioncurve";
 import Header from "@/components/header/header";
 import { MenuProvider } from "@/components/provider/transitionTextProvider";
-// import { Debug } from "@/components/debug";
+
+import { Debug } from "@/components/debug";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -37,7 +38,7 @@ export default function RootLayout({
               <Header />
             </MenuProvider>
             {children}
-            {/* <Debug /> */}
+            <Debug />
           </CurveTransition>
         </ReactLenis>
       </body>

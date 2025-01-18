@@ -47,7 +47,7 @@ export default function CurveTransition({ children }: ChildProps) {
         next();
         return;
       }
-      disableScroll();
+      // disableScroll();
 
       Promise.all([
         animate(
@@ -76,9 +76,9 @@ export default function CurveTransition({ children }: ChildProps) {
         next();
         return;
       }
-      enableScroll();
-      window.scrollTo({ top: 0 });
-      disableScroll();
+      // enableScroll();
+      // window.scrollTo({ top: 0 });
+      // disableScroll();
 
       Promise.all([
         animate(
@@ -113,7 +113,7 @@ export default function CurveTransition({ children }: ChildProps) {
       ]).then(() => {
         // Enable scroll after enter animation completes
 
-        enableScroll();
+        // enableScroll();
 
         next();
       });
@@ -121,11 +121,11 @@ export default function CurveTransition({ children }: ChildProps) {
     [paths, enableScroll, disableScroll]
   );
 
-  useEffect(() => {
-    return () => {
-      enableScroll();
-    };
-  }, [enableScroll]);
+  // useEffect(() => {
+  //   return () => {
+  //     enableScroll();
+  //   };
+  // }, [enableScroll]);
 
   return (
     <TransitionRouter

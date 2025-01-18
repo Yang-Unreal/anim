@@ -62,16 +62,16 @@ export default function Header() {
             setTransitionTextContent("Home");
           }}
         >
-          <p className=" transition-logo -translate-y-[7%] group-hover:rotate-[360deg] origin-center ">
+          <p className=" transition-logo  group-hover:rotate-[360deg] origin-center ">
             ©
           </p>
-          <div className="flex w-[50%] relative overflow-hidden whitespace-nowrap ml-[5px] transition-logo group-hover:pr-[70%]  D  font-formula">
+          <div className="flex w-[50%] relative overflow-hidden whitespace-nowrap ml-[5px] transition-logo group-hover:pr-[70%]   ">
             <p className="transition-logo group-hover:-translate-x-[29%] ">
               CODE BY DENNIS SNELLENBERG
             </p>
           </div>
         </Link>
-        <div className="flex items-center text-[28px] font-formula">
+        <div className="flex items-center text-[28px] ">
           <Link
             href={"/work"}
             onClick={() => {
