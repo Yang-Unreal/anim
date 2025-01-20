@@ -9,20 +9,25 @@ import Contact from "@/components/contact/contact";
 import { AnimatePresence } from "motion/react";
 import { useEffect } from "react";
 import Preloader from "@/components/preloader/preloader";
-
 import { UsePreloaderState } from "@/components/provider/preloaderContextProvider";
-
 export default function Home() {
   const { showPreloader, setShowPreloader } = UsePreloaderState();
-
   useEffect(() => {
-    const timer = setTimeout(() => {
+    const isFirstVisit = sessionStorage.getItem("isFirstVisit");
+
+    if (!isFirstVisit) {
+      // Set the flag to false after showing the preloader for the first time
+      sessionStorage.setItem("isFirstVisit", "false");
+
+      const timer = setTimeout(() => {
+        setShowPreloader(false);
+      }, 2000);
+
+      return () => clearTimeout(timer);
+    } else {
       setShowPreloader(false);
-    }, 2000);
-
-    return () => clearTimeout(timer);
-  });
-
+    }
+  }, [setShowPreloader]);
   return (
     <main className="overflow-hidden">
       <AnimatePresence mode="wait">
