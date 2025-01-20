@@ -38,7 +38,7 @@ export default function Home() {
       isInitialRender.current = false;
       return;
     }
-    console.log("pathname changed", pathname);
+
     setShowPreloader(false);
   }, [pathname]);
 
