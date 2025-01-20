@@ -35,8 +35,8 @@ export default function RootLayout({
       >
         <ReactLenis root>
           <CurveTransition>
-            {children}
             <MenuProvider>
+              {children}
               <Header />
             </MenuProvider>
             <Debug />
