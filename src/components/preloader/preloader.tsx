@@ -66,7 +66,7 @@ export default function Preloader() {
             <span></span>
             {words[index]}
           </motion.p>
-          <svg>
+          <svg className="absolute top-0 w-full h-[calc(100%+300px)]">
             <motion.path
               variants={curve}
               initial="initial"

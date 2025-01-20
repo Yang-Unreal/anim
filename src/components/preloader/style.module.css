@@ -7,7 +7,7 @@
   position: fixed;
   z-index: 99;
   background-color: #141516;
-  svg {
+  /* svg {
     position: absolute;
     top: 0;
     width: 100%;
@@ -15,7 +15,7 @@
     path {
       fill: #141516;
     }
-  }
+  } */
   p {
     display: flex;
     color: white;
