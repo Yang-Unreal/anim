@@ -7,40 +7,23 @@ import Description from "@/components/description/description";
 import SlidingImages from "@/components/slidingImages/slidingImages";
 import Contact from "@/components/contact/contact";
 import { AnimatePresence } from "motion/react";
-import { useEffect, useState, useRef } from "react";
+import { useEffect } from "react";
 import Preloader from "@/components/preloader/preloader";
-import { usePathname } from "next/navigation";
+// import { usePathname } from "next/navigation";
+import { UsePreloaderState } from "@/components/provider/preloaderContextProvider";
 
 export default function Home() {
-  const [showPreloader, setShowPreloader] = useState(false);
-  const pathname = usePathname();
-  const isInitialRender = useRef(true); // Ref to track initial render
+  const { showPreloader, setShowPreloader } = UsePreloaderState();
+  // const pathname = usePathname();
+  // const isInitialRender = useRef(true); // Ref to track initial render
 
   useEffect(() => {
-    const hasVisitedThisSession = sessionStorage.getItem(
-      "hasVisitedThisSession"
-    );
+    const timer = setTimeout(() => {
+      setShowPreloader(false);
+    }, 2000);
 
-    if (!hasVisitedThisSession) {
-      setShowPreloader(true);
-      sessionStorage.setItem("hasVisitedThisSession", "true");
-
-      const timer = setTimeout(() => {
-        setShowPreloader(false);
-      }, 2000);
-
-      return () => clearTimeout(timer);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (isInitialRender.current) {
-      isInitialRender.current = false;
-      return;
-    }
-
-    setShowPreloader(false);
-  }, [pathname]);
+    return () => clearTimeout(timer);
+  });
 
   return (
     <main className="overflow-hidden">
