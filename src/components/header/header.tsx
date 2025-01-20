@@ -13,8 +13,8 @@ import {
 import { useWindowDimensions } from "@/lib/hooks/useWindowDimensions";
 import { useTransitionState } from "@/lib/hooks/useTransitionState";
 
-// import { Link } from "@/components/customLink/customLink";
-import Link from "next/link";
+import { Link } from "@/components/customLink/customLink";
+// import Link from "next/link";
 
 export default function Header() {
   const { menuIsActive, setMenuIsActive } = UseMenuState();

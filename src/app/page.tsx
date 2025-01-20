@@ -9,13 +9,11 @@ import Contact from "@/components/contact/contact";
 import { AnimatePresence } from "motion/react";
 import { useEffect } from "react";
 import Preloader from "@/components/preloader/preloader";
-// import { usePathname } from "next/navigation";
+
 import { UsePreloaderState } from "@/components/provider/preloaderContextProvider";
 
 export default function Home() {
   const { showPreloader, setShowPreloader } = UsePreloaderState();
-  // const pathname = usePathname();
-  // const isInitialRender = useRef(true); // Ref to track initial render
 
   useEffect(() => {
     const timer = setTimeout(() => {
