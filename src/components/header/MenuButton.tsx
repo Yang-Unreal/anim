@@ -16,11 +16,11 @@ export function MenuButton({ isActive, ref, ...props }: MenuButtonProps) {
     isActive ? activeClass : inactiveClass
   }`;
   return (
-    <div className="fixed right-0 z-[50] p-8">
+    <div className="fixed right-0 z-[30] p-8">
       <button
         {...props}
         ref={ref}
-        className="flex h-20 w-20 cursor-pointer items-center justify-center rounded-full bg-[#455ce9] scale-0"
+        className="flex h-20 w-20 cursor-pointer items-center justify-center rounded-full bg-[#455ce9] scale-0 "
       >
         <div className={computedClass} />
       </button>
