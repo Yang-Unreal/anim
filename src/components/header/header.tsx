@@ -12,11 +12,12 @@ import {
 } from "@/components/provider/transitionTextProvider";
 import { useWindowDimensions } from "@/lib/hooks/useWindowDimensions";
 import { useTransitionState } from "@/lib/hooks/useTransitionState";
-
+import { UsePreloaderState } from "../provider/preloaderContextProvider";
 import { Link } from "@/components/customLink/customLink";
 // import Link from "next/link";
 
 export default function Header() {
+  const { setShowPreloader } = UsePreloaderState();
   const { menuIsActive, setMenuIsActive } = UseMenuState();
   const { setTransitionTextContent } = UseTransitionTextState();
   const button = useRef<HTMLButtonElement>(null!);
@@ -60,6 +61,7 @@ export default function Header() {
           href={"/"}
           onClick={() => {
             setTransitionTextContent("Home");
+            setShowPreloader(false);
           }}
         >
           <p className=" transition-logo  group-hover:rotate-[360deg] origin-center ">
