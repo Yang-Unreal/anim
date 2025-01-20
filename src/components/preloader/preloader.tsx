@@ -1,5 +1,5 @@
 "use client";
-import styles from "@/components/preloader/style.module.css";
+
 import { useEffect, useState } from "react";
 import { motion } from "motion/react";
 import { opacity, slideUp } from "@/components/preloader/anim";
@@ -58,11 +58,16 @@ export default function Preloader() {
       variants={slideUp}
       initial="initial"
       exit="exit"
-      className={styles.introduction}
+      className="fixed top-0 left-0 w-full h-screen flex items-center justify-center  z-[99] bg-[#141516]"
     >
       {dimension.width > 0 && (
         <>
-          <motion.p variants={opacity} initial="initial" animate="enter">
+          <motion.p
+            variants={opacity}
+            initial="initial"
+            animate="enter"
+            className="absolute flex items-center text-white text-4xl z-10"
+          >
             <span></span>
             {words[index]}
           </motion.p>
