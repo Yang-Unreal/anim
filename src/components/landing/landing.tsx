@@ -25,6 +25,7 @@ export default function Landing() {
           height={height}
           width={width}
           className="object-cover h-auto"
+          sizes="100vw"
         />
       </div>
       <div className="absolute top-0 left-0 w-full h-full">

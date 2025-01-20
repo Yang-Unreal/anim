@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ReactLenis } from "@/lib/utils/lenis";
-import CurveTransition from "@/components/curve/Transitioncurve";
+// import CurveTransition from "@/components/curve/Transitioncurve";
 import Header from "@/components/header/header";
 import { MenuProvider } from "@/components/provider/transitionTextProvider";
 
@@ -33,13 +33,13 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ReactLenis root>
-          <CurveTransition>
-            <MenuProvider>
-              <Header />
-            </MenuProvider>
-            {children}
-            <Debug />
-          </CurveTransition>
+          {/* <CurveTransition> */}
+          <MenuProvider>
+            <Header />
+          </MenuProvider>
+          {children}
+          <Debug />
+          {/* </CurveTransition> */}
         </ReactLenis>
       </body>
     </html>

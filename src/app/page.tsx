@@ -7,43 +7,45 @@ import Description from "@/components/description/description";
 import SlidingImages from "@/components/slidingImages/slidingImages";
 import Contact from "@/components/contact/contact";
 import { AnimatePresence } from "motion/react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Preloader from "@/components/preloader/preloader";
-import { useRefreshDetection } from "@/lib/hooks/useRefreshDetection";
-import { useTransitionState } from "@/lib/hooks/useTransitionState";
+import { usePathname } from "next/navigation";
 
 export default function Home() {
-  const [isRefreshed, setIsRefreshed] = useRefreshDetection();
-
-  const [isLoading, setIsLoading] = useState(true);
-  const [isFirstVisit, setIsFirstVisit] = useState(true);
+  const [showPreloader, setShowPreloader] = useState(false);
+  const pathname = usePathname();
+  const isInitialRender = useRef(true); // Ref to track initial render
 
   useEffect(() => {
-    // Check if this is the first visit
-    const hasVisited = localStorage.getItem("hasVisited");
-    if (!hasVisited) {
-      localStorage.setItem("hasVisited", "true");
-      setIsFirstVisit(true);
-    } else {
-      setIsFirstVisit(false);
+    const hasVisitedThisSession = sessionStorage.getItem(
+      "hasVisitedThisSession"
+    );
+
+    if (!hasVisitedThisSession) {
+      setShowPreloader(true);
+      sessionStorage.setItem("hasVisitedThisSession", "true");
+
+      const timer = setTimeout(() => {
+        setShowPreloader(false);
+      }, 2000);
+
+      return () => clearTimeout(timer);
     }
-
-    // Handle loading state
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-      setIsFirstVisit(false);
-      document.body.style.cursor = "default";
-      window.scrollTo(0, 0);
-    }, 2000);
-
-    return () => clearTimeout(timer);
   }, []);
 
-  const shouldShowPreloader = isLoading && (isRefreshed || isFirstVisit);
+  useEffect(() => {
+    if (isInitialRender.current) {
+      isInitialRender.current = false;
+      return;
+    }
+    console.log("pathname changed", pathname);
+    setShowPreloader(false);
+  }, [pathname]);
+
   return (
     <main className="overflow-hidden">
       <AnimatePresence mode="wait">
-        {isFirstVisit ? <Preloader /> : null}
+        {showPreloader && <Preloader />}
       </AnimatePresence>
       <Landing />
       <Description />
