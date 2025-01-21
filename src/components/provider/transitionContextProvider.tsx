@@ -19,6 +19,7 @@ import type {
   TransitionRouterContextType,
   NavigateProps,
 } from "@/lib/type";
+// import { useRefreshDetection } from "@/lib/hooks/useRefreshDetection";
 
 export const TransitionRouterContext =
   createContext<TransitionRouterContextType>({
@@ -33,6 +34,8 @@ export const TransitionRouter = ({
   enter = async (next) => next(),
   auto = false,
 }: TransitionRouterProps) => {
+  // const [isRefreshed] = useRefreshDetection();
+
   const router = useRouter();
   const pathname = usePathname();
   const [stage, setStage] = useState<Stage>("none");
@@ -150,6 +153,15 @@ export const TransitionRouter = ({
       runEnter();
     }
   }, [stage, enter]);
+
+  // useEffect(() => {
+  //   if (isRefreshed == true) {
+  //     console.log(isRefreshed);
+  //     try {
+  //       enter(() => {});
+  //     } catch {}
+  //   }
+  // }, [enter, isRefreshed]);
 
   // Component unmounts during navigation
   useEffect(() => {

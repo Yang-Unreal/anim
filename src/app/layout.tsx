@@ -37,8 +37,8 @@ export default function RootLayout({
           <CurveTransition>
             <MenuProvider>
               <PreloaderContextProvider>
-                <Header />
                 {children}
+                <Header />
               </PreloaderContextProvider>
             </MenuProvider>
             <Debug />

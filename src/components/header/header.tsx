@@ -27,6 +27,7 @@ export default function Header() {
   const transitionCursor = `${
     isTransitionCompleted ? "cursor-pointer" : "pointer-events-none"
   }`;
+
   useLayoutEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
     gsap.to(button.current, {

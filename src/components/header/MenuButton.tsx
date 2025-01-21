@@ -16,7 +16,7 @@ export function MenuButton({ isActive, ref, ...props }: MenuButtonProps) {
     isActive ? activeClass : inactiveClass
   }`;
   return (
-    <div className="fixed right-0 z-[30] p-8">
+    <div className="fixed right-0 top-0 z-[32] p-8">
       <button
         {...props}
         ref={ref}
