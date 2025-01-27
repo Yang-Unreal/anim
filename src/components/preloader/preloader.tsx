@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import { useEffect, useState } from "react";
 import { isFirstVisit } from "@/lib/utils/isFirstVisit";
 import { opacity, slideUp } from "./anim";
