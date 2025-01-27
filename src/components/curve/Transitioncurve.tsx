@@ -1,8 +1,7 @@
 "use client";
 
-import { useRef, useCallback } from "react";
+import { useRef, useCallback, useEffect } from "react";
 
-// import { TransitionRouter } from "@/lib/utils/pageTransition/transition";
 import { TransitionRouter } from "@/components/provider/transitionContextProvider";
 import { animate } from "motion/react";
 import { useWindowDimensions } from "@/lib/hooks/useWindowDimensions";
@@ -21,25 +20,23 @@ export default function CurveTransition({ children }: ChildProps) {
 
   const paths = generatePaths({ width, height });
 
-  // Function to disable scrolling
-  // const disableScroll = useCallback(() => {
-  //   // Save current scroll position
-  //   const scrollPosition = window.scrollY;
-  //   document.body.style.overflow = "hidden";
-  //   document.body.style.position = "fixed";
-  //   document.body.style.width = "100%";
-  //   document.body.style.top = `-${scrollPosition}px`;
-  // }, []);
+  const disableScroll = useCallback(() => {
+    // Save current scroll position
+    const scrollPosition = window.scrollY;
+    document.body.style.overflow = "hidden";
+    document.body.style.position = "fixed";
+    document.body.style.width = "100%";
+    document.body.style.top = `-${scrollPosition}px`;
+  }, []);
 
-  // Function to enable scrolling
-  // const enableScroll = useCallback(() => {
-  //   const scrollPosition = parseInt(document.body.style.top || "0");
-  //   document.body.style.removeProperty("overflow");
-  //   document.body.style.removeProperty("position");
-  //   document.body.style.removeProperty("width");
-  //   document.body.style.removeProperty("top");
-  //   window.scrollTo(0, Math.abs(scrollPosition));
-  // }, []);
+  const enableScroll = useCallback(() => {
+    const scrollPosition = parseInt(document.body.style.top || "0");
+    document.body.style.removeProperty("overflow");
+    document.body.style.removeProperty("position");
+    document.body.style.removeProperty("width");
+    document.body.style.removeProperty("top");
+    window.scrollTo(0, Math.abs(scrollPosition));
+  }, []);
 
   const handleLeaveAnimation = useCallback(
     (next: () => void) => {
@@ -47,7 +44,7 @@ export default function CurveTransition({ children }: ChildProps) {
         next();
         return;
       }
-      // disableScroll();
+      disableScroll();
 
       Promise.all([
         animate(
@@ -67,7 +64,7 @@ export default function CurveTransition({ children }: ChildProps) {
         ),
       ]).then(next);
     },
-    [paths]
+    [disableScroll, paths.initial, paths.leave]
   );
 
   const handleEnterAnimation = useCallback(
@@ -76,9 +73,9 @@ export default function CurveTransition({ children }: ChildProps) {
         next();
         return;
       }
-      // enableScroll();
-      // window.scrollTo({ top: 0 });
-      // disableScroll();
+      enableScroll();
+      window.scrollTo({ top: 0 });
+      disableScroll();
 
       Promise.all([
         animate(
@@ -111,21 +108,19 @@ export default function CurveTransition({ children }: ChildProps) {
           }
         ),
       ]).then(() => {
-        // Enable scroll after enter animation completes
-
-        // enableScroll();
+        enableScroll();
 
         next();
       });
     },
-    [paths]
+    [disableScroll, enableScroll, paths.enter]
   );
 
-  // useEffect(() => {
-  //   return () => {
-  //     enableScroll();
-  //   };
-  // }, [enableScroll]);
+  useEffect(() => {
+    return () => {
+      enableScroll();
+    };
+  }, [enableScroll]);
 
   return (
     <TransitionRouter
