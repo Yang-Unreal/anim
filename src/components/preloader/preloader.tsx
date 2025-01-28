@@ -1,10 +1,7 @@
-"use client";
-
-import { motion, AnimatePresence } from "motion/react";
 import { useEffect, useState } from "react";
-import { isFirstVisit } from "@/lib/utils/isFirstVisit";
-import { opacity, slideUp } from "./anim";
-
+import { motion, AnimatePresence } from "framer-motion";
+import { useWindowDimensions } from "@/lib/hooks/useWindowDimensions";
+import type { WindowDimensions } from "@/lib/type";
 const words = [
   "Hello",
   "Bonjour",
@@ -16,82 +13,92 @@ const words = [
   "Hallo",
 ];
 
-export default function Preloader() {
+const opacity = {
+  initial: { opacity: 0 },
+  enter: { opacity: 0.75, transition: { duration: 1, delay: 0.2 } },
+  exit: { opacity: 0, transition: { duration: 0.8, delay: 0.2 } },
+};
+
+const slideUp = {
+  initial: { y: 0 },
+  exit: {
+    y: "-100vh",
+    transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] },
+  },
+};
+
+const Preloader = () => {
   const [showAnimation, setShowAnimation] = useState(false);
   const [index, setIndex] = useState(0);
-  const [dimension, setDimension] = useState({ width: 0, height: 0 });
+  const dimension = useWindowDimensions();
+
+  const curveAnimation = (dimension: WindowDimensions) => ({
+    initial: {
+      d: `M0 0 L${dimension.width} 0 L${dimension.width} ${dimension.height} Q${
+        dimension.width / 2
+      } ${dimension.height + 300} 0 ${dimension.height} L0 0`,
+    },
+    exit: {
+      d: `M0 0 L${dimension.width} 0 L${dimension.width} ${dimension.height} Q${
+        dimension.width / 2
+      } ${dimension.height} 0 ${dimension.height} L0 0`,
+      transition: { duration: 0.7, ease: [0.76, 0, 0.24, 1], delay: 0.3 },
+    },
+  });
 
   useEffect(() => {
-    setDimension({ width: window.innerWidth, height: window.innerHeight });
-    const firstVisit = isFirstVisit();
-    setShowAnimation(firstVisit);
-
-    if (firstVisit) {
-      const timer = setTimeout(() => {
-        setShowAnimation(false);
-      }, 2000);
-      return () => clearTimeout(timer);
+    // Check if the animation has already been shown in this session
+    const isFirstVisit = sessionStorage.getItem("visited") === null;
+    if (isFirstVisit) {
+      setShowAnimation(true);
+      sessionStorage.setItem("visited", "true"); // Mark as visited for this session
     }
   }, []);
 
   useEffect(() => {
-    if (index == words.length - 1) return;
-    setTimeout(
-      () => {
-        setIndex(index + 1);
-      },
-      index == 0 ? 1000 : 150
-    );
+    if (index < words.length - 1) {
+      const timer = setTimeout(
+        () => setIndex(index + 1),
+        index === 0 ? 1000 : 150
+      );
+      return () => clearTimeout(timer);
+    }
   }, [index]);
 
-  const initialPath = `M0 0 L${dimension.width} 0 L${dimension.width} ${
-    dimension.height
-  } Q${dimension.width / 2} ${dimension.height + 300} 0 ${
-    dimension.height
-  }  L0 0`;
-  const targetPath = `M0 0 L${dimension.width} 0 L${dimension.width} ${
-    dimension.height
-  } Q${dimension.width / 2} ${dimension.height} 0 ${dimension.height}  L0 0`;
-
-  const curve = {
-    initial: {
-      d: initialPath,
-    },
-    exit: {
-      d: targetPath,
-      transition: { duration: 0.7, ease: [0.76, 0, 0.24, 1], delay: 0.3 },
-    },
-  };
+  useEffect(() => {
+    if (showAnimation) {
+      const timer = setTimeout(() => setShowAnimation(false), 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [showAnimation]);
 
   return (
     <AnimatePresence mode="wait">
       {showAnimation && (
         <motion.div
-          key="preloader"
           variants={slideUp}
           initial="initial"
           exit="exit"
-          className="fixed top-0 left-0 w-full h-screen flex items-center justify-center z-[50] bg-[#141516]"
+          className="fixed top-0 left-0 w-full h-screen flex items-center justify-center z-50 bg-[#141516]"
         >
           {dimension.width > 0 && (
             <>
               <motion.p
                 variants={opacity}
                 initial="initial"
-                animate="animate"
+                animate="enter"
                 exit="exit"
                 className="absolute flex items-center text-white text-4xl z-10"
               >
-                <span></span>
                 {words[index]}
               </motion.p>
               <svg className="absolute top-0 w-full h-[calc(100%+300px)]">
                 <motion.path
-                  fill="#141516"
-                  variants={curve}
+                  variants={curveAnimation(dimension)}
                   initial="initial"
                   exit="exit"
-                ></motion.path>
+                  fill="#141516"
+                />
               </svg>
             </>
           )}
@@ -99,4 +106,6 @@ export default function Preloader() {
       )}
     </AnimatePresence>
   );
-}
+};
+
+export default Preloader;

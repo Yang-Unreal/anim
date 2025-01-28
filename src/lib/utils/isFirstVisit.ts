@@ -1,9 +1,9 @@
 export function isFirstVisit(): boolean {
   if (typeof window === "undefined") return false;
 
-  const visited = localStorage.getItem("visited");
+  const visited = sessionStorage.getItem("visited");
   if (!visited) {
-    localStorage.setItem("visited", "true");
+    sessionStorage.setItem("visited", "true");
     return true;
   }
   return false;
