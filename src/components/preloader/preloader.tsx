@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import { useWindowDimensions } from "@/lib/hooks/useWindowDimensions";
 import type { WindowDimensions } from "@/lib/type";
 const words = [
