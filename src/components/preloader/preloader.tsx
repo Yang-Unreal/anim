@@ -28,7 +28,11 @@ const slideUp = {
 };
 
 const Preloader = () => {
-  const [showAnimation, setShowAnimation] = useState(false);
+  const isFirstVisit = sessionStorage.getItem("visited") === null;
+  if (isFirstVisit) {
+    sessionStorage.setItem("visited", "true");
+  }
+  const [showAnimation, setShowAnimation] = useState(isFirstVisit);
   const [index, setIndex] = useState(0);
   const dimension = useWindowDimensions();
 
@@ -45,15 +49,6 @@ const Preloader = () => {
       transition: { duration: 0.7, ease: [0.76, 0, 0.24, 1], delay: 0.3 },
     },
   });
-
-  useEffect(() => {
-    // Check if the animation has already been shown in this session
-    const isFirstVisit = sessionStorage.getItem("visited") === null;
-    if (isFirstVisit) {
-      setShowAnimation(true);
-      sessionStorage.setItem("visited", "true"); // Mark as visited for this session
-    }
-  }, []);
 
   useEffect(() => {
     if (index < words.length - 1) {
