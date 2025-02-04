@@ -5,8 +5,10 @@ import { ReactLenis } from "@/lib/utils/lenis";
 import CurveTransition from "@/components/curve/Transitioncurve";
 import Header from "@/components/header/header";
 import { MenuProvider } from "@/components/provider/transitionTextProvider";
-// import { PreloaderContextProvider } from "@/components/provider/preloaderContextProvider";
+import { PreloaderContextProvider } from "@/components/provider/preloaderContextProvider";
 import { Debug } from "@/components/debug";
+
+import Preloader from "@/components/preloader/preloader";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,10 +38,11 @@ export default function RootLayout({
         <ReactLenis root>
           <CurveTransition>
             <MenuProvider>
-              {/* <PreloaderContextProvider> */}
-              {children}
-              <Header />
-              {/* </PreloaderContextProvider> */}
+              <PreloaderContextProvider>
+                <Preloader />
+                {children}
+                <Header />
+              </PreloaderContextProvider>
             </MenuProvider>
             <Debug />
           </CurveTransition>
