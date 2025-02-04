@@ -17,7 +17,7 @@ import { Link } from "@/components/customLink/customLink";
 // import Link from "next/link";
 
 export default function Header() {
-  const { setShowPreloader } = UsePreloaderState();
+  const { showPage } = UsePreloaderState();
   const { menuIsActive, setMenuIsActive } = UseMenuState();
   const { setTransitionTextContent } = UseTransitionTextState();
   const button = useRef<HTMLButtonElement>(null!);
@@ -55,14 +55,13 @@ export default function Header() {
   });
 
   return (
-    <div className="hidden">
-      <div className="flex absolute z-[33] top-0 left-0 w-full items-center justify-between px-[40px] py-5 text-black box-border text-[20px] ">
+    <div className={`${!showPage ? "hidden" : ""}`}>
+      <div className="flex absolute z-[33] top-0 left-0 w-full items-center justify-between px-[40px] py-5  box-border text-[20px] ">
         <Link
           className={`flex top-0 cursor-pointer group  ${transitionCursor} -translate-y-[30%]`}
           href={"/"}
           onClick={() => {
             setTransitionTextContent("Home");
-            setShowPreloader(false);
           }}
         >
           <p className=" transition-logo  group-hover:rotate-[360deg] origin-center ">

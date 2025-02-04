@@ -30,7 +30,7 @@ const slideUp = {
 };
 
 const Preloader = () => {
-  const { setShowPreloader } = UsePreloaderState();
+  const { setShowPage } = UsePreloaderState();
   const [isFirstVisit, setIsFirstVisit] = useState<boolean>(false);
   const [showAnimation, setShowAnimation] = useState<boolean>(false);
   const [index, setIndex] = useState(0);
@@ -42,11 +42,18 @@ const Preloader = () => {
       if (visited === null) {
         sessionStorage.setItem("visited", "true");
         setIsFirstVisit(true);
+        setShowPage(false);
       } else {
         setIsFirstVisit(false);
       }
     }
-  }, []);
+  }, [setShowPage]);
+
+  useEffect(() => {
+    if (isFirstVisit) {
+      setShowAnimation(true);
+    }
+  }, [isFirstVisit]);
 
   const curveAnimation = (dimension: WindowDimensions) => ({
     initial: {
@@ -76,17 +83,11 @@ const Preloader = () => {
     if (showAnimation) {
       const timer = setTimeout(() => {
         setShowAnimation(false);
-        setShowPreloader(true);
+        setShowPage(true);
       }, 2000);
       return () => clearTimeout(timer);
     }
-  }, [setShowPreloader, showAnimation]);
-
-  useEffect(() => {
-    if (isFirstVisit) {
-      setShowAnimation(true);
-    }
-  }, [isFirstVisit]);
+  }, [setShowPage, showAnimation]);
 
   return (
     <AnimatePresence mode="wait">

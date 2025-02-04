@@ -48,15 +48,12 @@ export default function InfiniteText() {
     <div className="w-full h-full overflow-hidden flex relative">
       <div className="absolute bottom-0">
         <div ref={slider} className="relative whitespace-nowrap font-formula">
-          <p
-            ref={firstText}
-            className="relative m-0 text-white text-[150px]  pr-10"
-          >
+          <p ref={firstText} className="relative m-0  text-[150px]  pr-10">
             LET THE HIDDEN PEARLS SHINE FOR THE WORLD -
           </p>
           <p
             ref={secondText}
-            className="absolute left-full top-0 m-0 text-white text-[150px]  pr-10"
+            className="absolute left-full top-0 m-0  text-[150px]  pr-10"
           >
             LET THE HIDDEN PEARLS SHINE FOR THE WORLD -
           </p>

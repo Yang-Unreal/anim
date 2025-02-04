@@ -32,7 +32,7 @@ export default function Landing() {
         <InfiniteText />
         <motion.div
           style={{ y: Y }}
-          className="absolute top-[20%] left-[65%] text-white text-[24px] font-light font-formula"
+          className="absolute top-[20%] left-[65%]  text-[24px] font-light font-formula"
         >
           <svg
             width="9"

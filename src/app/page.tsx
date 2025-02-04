@@ -8,18 +8,14 @@ import SlidingImages from "@/components/slidingImages/slidingImages";
 import Contact from "@/components/contact/contact";
 import { UsePreloaderState } from "@/components/provider/preloaderContextProvider";
 export default function Home() {
-  const { showPreloader } = UsePreloaderState();
+  const { showPage } = UsePreloaderState();
   return (
-    <>
-      {showPreloader && (
-        <main className="overflow-hidden">
-          <Landing />
-          <Description />
-          <ProjectGallery initialProjects={projects} />
-          <SlidingImages />
-          <Contact />
-        </main>
-      )}
-    </>
+    <main className={`overflow-hidden ${!showPage ? "hidden" : ""}`}>
+      <Landing />
+      <Description />
+      <ProjectGallery initialProjects={projects} />
+      <SlidingImages />
+      <Contact />
+    </main>
   );
 }

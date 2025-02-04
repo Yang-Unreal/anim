@@ -3,20 +3,20 @@
 import { createContext, useContext, useState } from "react";
 import { ChildProps } from "@/lib/type";
 interface PreloaderContextType {
-  showPreloader: boolean;
-  setShowPreloader: React.Dispatch<React.SetStateAction<boolean>>;
+  showPage: boolean;
+  setShowPage: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const PreloaderContext = createContext<PreloaderContextType>({
-  showPreloader: false,
-  setShowPreloader: () => {},
+  showPage: true,
+  setShowPage: () => {},
 });
 
 export function PreloaderContextProvider({ children }: ChildProps) {
-  const [showPreloader, setShowPreloader] = useState<boolean>(false);
+  const [showPage, setShowPage] = useState<boolean>(true);
 
   return (
-    <PreloaderContext.Provider value={{ showPreloader, setShowPreloader }}>
+    <PreloaderContext.Provider value={{ showPage, setShowPage }}>
       {children}
     </PreloaderContext.Provider>
   );

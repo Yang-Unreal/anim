@@ -40,8 +40,8 @@ export default function RootLayout({
             <MenuProvider>
               <PreloaderContextProvider>
                 <Preloader />
-                {children}
                 <Header />
+                {children}
               </PreloaderContextProvider>
             </MenuProvider>
             <Debug />
