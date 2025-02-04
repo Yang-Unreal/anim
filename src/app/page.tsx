@@ -10,7 +10,11 @@ import { UsePreloaderState } from "@/components/provider/preloaderContextProvide
 export default function Home() {
   const { showPage } = UsePreloaderState();
   return (
-    <main className={`overflow-hidden ${!showPage ? "hidden" : ""}`}>
+    <main
+      className={`${
+        showPage ? "opacity-100" : "opacity-0"
+      } transition-opacity duration-300`}
+    >
       <Landing />
       <Description />
       <ProjectGallery initialProjects={projects} />
