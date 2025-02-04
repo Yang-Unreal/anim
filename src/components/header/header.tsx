@@ -55,7 +55,7 @@ export default function Header() {
   });
 
   return (
-    <div>
+    <div className="hidden">
       <div className="flex absolute z-[33] top-0 left-0 w-full items-center justify-between px-[40px] py-5 text-black box-border text-[20px] ">
         <Link
           className={`flex top-0 cursor-pointer group  ${transitionCursor} -translate-y-[30%]`}
