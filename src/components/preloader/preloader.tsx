@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { useWindowDimensions } from "@/lib/hooks/useWindowDimensions";
 import type { WindowDimensions } from "@/lib/type";
-
+import { UsePreloaderState } from "@/components/provider/preloaderContextProvider";
 const words = [
   "Hello",
   "Bonjour",
@@ -30,6 +30,7 @@ const slideUp = {
 };
 
 const Preloader = () => {
+  const { setShowPreloader } = UsePreloaderState();
   const [isFirstVisit, setIsFirstVisit] = useState<boolean>(false);
   const [showAnimation, setShowAnimation] = useState<boolean>(false);
   const [index, setIndex] = useState(0);
@@ -73,10 +74,13 @@ const Preloader = () => {
 
   useEffect(() => {
     if (showAnimation) {
-      const timer = setTimeout(() => setShowAnimation(false), 2000);
+      const timer = setTimeout(() => {
+        setShowAnimation(false);
+        setShowPreloader(true);
+      }, 2000);
       return () => clearTimeout(timer);
     }
-  }, [showAnimation]);
+  }, [setShowPreloader, showAnimation]);
 
   useEffect(() => {
     if (isFirstVisit) {

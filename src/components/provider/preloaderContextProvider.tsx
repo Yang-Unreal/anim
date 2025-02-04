@@ -8,12 +8,12 @@ interface PreloaderContextType {
 }
 
 const PreloaderContext = createContext<PreloaderContextType>({
-  showPreloader: true,
+  showPreloader: false,
   setShowPreloader: () => {},
 });
 
 export function PreloaderContextProvider({ children }: ChildProps) {
-  const [showPreloader, setShowPreloader] = useState<boolean>(true);
+  const [showPreloader, setShowPreloader] = useState<boolean>(false);
 
   return (
     <PreloaderContext.Provider value={{ showPreloader, setShowPreloader }}>
