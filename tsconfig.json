@@ -28,7 +28,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src/components/project/project.js",
-    "src/components/header/nav/link/link.jsx"
+    "src/components/header/nav/link/link.jsx",
+    "src/lib/utils/pageTransition/index.js"
   ],
   "exclude": ["node_modules"]
 }
