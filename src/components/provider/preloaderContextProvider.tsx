@@ -1,24 +1,24 @@
 "use client";
 
-import { createContext, useContext, useState, useEffect } from "react";
-import { ChildProps } from "@/lib/type";
-interface PreloaderContextType {
+import { createContext, useContext, useState } from "react";
+
+type PreloaderContextType = {
   showPage: boolean;
-  setShowPage: React.Dispatch<React.SetStateAction<boolean>>;
-}
+  setShowPage: (show: boolean) => void;
+};
 
 const PreloaderContext = createContext<PreloaderContextType>({
   showPage: false,
   setShowPage: () => {},
 });
 
-export function PreloaderContextProvider({ children }: ChildProps) {
-  const [showPage, setShowPage] = useState<boolean>(false);
-  useEffect(() => {
-    // Client-side check after mount
-    const visited = sessionStorage.getItem("visited");
-    if (visited) setShowPage(true);
-  }, []);
+export function PreloaderContextProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const [showPage, setShowPage] = useState(false);
+
   return (
     <PreloaderContext.Provider value={{ showPage, setShowPage }}>
       {children}
@@ -26,10 +26,4 @@ export function PreloaderContextProvider({ children }: ChildProps) {
   );
 }
 
-export function UsePreloaderState() {
-  const context = useContext(PreloaderContext);
-  if (!context) {
-    throw new Error("usePreloaderState must be used within a MyProvider");
-  }
-  return context;
-}
+export const usePreloaderContext = () => useContext(PreloaderContext);
