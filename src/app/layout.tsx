@@ -40,9 +40,10 @@ export default function RootLayout({
             <MenuProvider>
               <PreloaderContextProvider>
                 <Preloader />
-                <ReloadAnimation />
+
                 <Header />
                 {children}
+                <ReloadAnimation />
               </PreloaderContextProvider>
             </MenuProvider>
             <Debug />
