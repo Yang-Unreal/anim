@@ -7,7 +7,7 @@ import Header from "@/components/header/header";
 import { MenuProvider } from "@/components/provider/transitionTextProvider";
 import { PreloaderContextProvider } from "@/components/provider/preloaderContextProvider";
 import { Debug } from "@/components/debug";
-
+import ReloadAnimation from "@/components/reload/reloadAnimation";
 import { Preloader } from "@/components/preloader/preloader";
 
 const geistSans = Geist({
@@ -40,6 +40,7 @@ export default function RootLayout({
             <MenuProvider>
               <PreloaderContextProvider>
                 <Preloader />
+                <ReloadAnimation />
                 <Header />
                 {children}
               </PreloaderContextProvider>

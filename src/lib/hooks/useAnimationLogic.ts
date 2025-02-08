@@ -22,8 +22,11 @@ export const useAnimationLogic = ({
   useEffect(() => {
     if (firstVisit) {
       dispatch("START");
+    } else {
+      dispatch("COMPLETE");
+      setShowPage(true);
     }
-  }, [firstVisit, dispatch]);
+  }, [firstVisit, dispatch, setShowPage]);
 
   // Handle word cycling
   useEffect(() => {

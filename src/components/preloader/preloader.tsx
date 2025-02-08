@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "motion/react";
-import { useReducer, useEffect } from "react";
+import { useReducer } from "react";
 import { useFirstVisit } from "@/lib/hooks/useFirstVisit";
 import { useAnimationLogic } from "@/lib/hooks/useAnimationLogic";
 import { useWindowDimensions } from "@/lib/hooks/useWindowDimensions";
@@ -67,13 +67,6 @@ export const Preloader = () => {
     status: "idle",
     wordIndex: 0,
   });
-
-  useEffect(() => {
-    if (!firstVisit) {
-      dispatch("COMPLETE");
-      setShowPage(true);
-    }
-  }, [firstVisit, dispatch, setShowPage]);
 
   useAnimationLogic({
     state,

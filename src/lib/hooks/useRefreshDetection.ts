@@ -1,13 +1,13 @@
 "use client";
 
 import { useState, useEffect } from "react";
-
+import { useFirstVisit } from "@/lib/hooks/useFirstVisit";
 export function useRefreshDetection(): [
   boolean,
   React.Dispatch<React.SetStateAction<boolean>>
 ] {
   const [isRefreshed, setIsRefreshed] = useState(false);
-
+  const firstVisit = useFirstVisit();
   useEffect(() => {
     const handleBeforeUnload = () => {
       // Set a flag in sessionStorage before the page unloads
@@ -16,7 +16,7 @@ export function useRefreshDetection(): [
 
     const checkIfRefreshed = () => {
       const refreshFlag = sessionStorage.getItem("isRefreshing");
-      if (refreshFlag) {
+      if (refreshFlag && !firstVisit) {
         setIsRefreshed(true);
         // Clear the flag
         sessionStorage.removeItem("isRefreshing");
@@ -33,7 +33,7 @@ export function useRefreshDetection(): [
     return () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
     };
-  }, []);
+  }, [firstVisit]);
 
   return [isRefreshed, setIsRefreshed];
 }

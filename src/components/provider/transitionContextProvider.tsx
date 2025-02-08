@@ -154,15 +154,6 @@ export const TransitionRouter = ({
     }
   }, [stage, enter]);
 
-  // useEffect(() => {
-  //   if (isRefreshed == true) {
-  //     console.log(isRefreshed);
-  //     try {
-  //       enter(() => {});
-  //     } catch {}
-  //   }
-  // }, [enter, isRefreshed]);
-
   // Component unmounts during navigation
   useEffect(() => {
     return () => {
