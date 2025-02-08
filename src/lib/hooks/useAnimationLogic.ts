@@ -62,7 +62,6 @@ export const useAnimationLogic = ({
     if (state.status === "exiting") {
       dispatch("COMPLETE");
       setShowPage(true);
-      console.log("Complete");
     }
   }, [state.status, dispatch, setShowPage]);
 };

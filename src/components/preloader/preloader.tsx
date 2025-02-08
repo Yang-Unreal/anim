@@ -1,13 +1,13 @@
 "use client";
 
 import { motion, AnimatePresence } from "motion/react";
-import { useReducer, useEffect, useState } from "react";
-// import { useFirstVisit } from "@/lib/hooks/useFirstVisit";
+import { useReducer, useEffect } from "react";
+import { useFirstVisit } from "@/lib/hooks/useFirstVisit";
 import { useAnimationLogic } from "@/lib/hooks/useAnimationLogic";
 import { useWindowDimensions } from "@/lib/hooks/useWindowDimensions";
 import { usePreloaderContext } from "@/components/provider/preloaderContextProvider";
+import { CurveAnimation } from "@/components/preloader/CurveAnimation";
 
-import type { WindowDimensions } from "@/lib/type";
 const words = [
   "Hello",
   "Bonjour",
@@ -52,19 +52,7 @@ function animationReducer(
       return state;
   }
 }
-const curveAnimation = (dimension: WindowDimensions) => ({
-  initial: {
-    d: `M0 0 L${dimension.width} 0 L${dimension.width} ${dimension.height} Q${
-      dimension.width / 2
-    } ${dimension.height + 300} 0 ${dimension.height} L0 0`,
-  },
-  exit: {
-    d: `M0 0 L${dimension.width} 0 L${dimension.width} ${dimension.height} Q${
-      dimension.width / 2
-    } ${dimension.height} 0 ${dimension.height} L0 0`,
-    transition: { duration: 0.7, ease: [0.76, 0, 0.24, 1], delay: 0.3 },
-  },
-});
+
 const opacity = {
   initial: { opacity: 0 },
   enter: { opacity: 0.75, transition: { duration: 1, delay: 0.2 } },
@@ -73,25 +61,19 @@ const opacity = {
 
 export const Preloader = () => {
   const { setShowPage } = usePreloaderContext();
-  // const firstVisit = useFirstVisit();
-  const [firstVisit, setFirstVisit] = useState<boolean>(false);
-  const dimension = useWindowDimensions();
+  const firstVisit = useFirstVisit();
+  const { width, height } = useWindowDimensions();
   const [state, dispatch] = useReducer(animationReducer, {
     status: "idle",
     wordIndex: 0,
   });
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const visited = sessionStorage.getItem("visited");
-      if (visited === null) {
-        sessionStorage.setItem("visited", "true");
-        setFirstVisit(true);
-      } else {
-        setFirstVisit(false);
-      }
+    if (!firstVisit) {
+      dispatch("COMPLETE");
+      setShowPage(true);
     }
-  }, [setShowPage]);
+  }, [firstVisit, dispatch, setShowPage]);
 
   useAnimationLogic({
     state,
@@ -102,7 +84,7 @@ export const Preloader = () => {
 
   return (
     <AnimatePresence mode="wait">
-      {state.status !== "complete" && dimension.width > 0 && (
+      {state.status !== "complete" && width > 0 && (
         <motion.div
           variants={slideUp}
           initial="initial"
@@ -118,14 +100,7 @@ export const Preloader = () => {
           >
             {words[state.wordIndex]}
           </motion.p>
-          <svg className="absolute top-0 w-full h-[calc(100%+300px)]">
-            <motion.path
-              variants={curveAnimation(dimension)}
-              initial="initial"
-              exit="exit"
-              fill="#141516"
-            />
-          </svg>
+          <CurveAnimation width={width} height={height} />
         </motion.div>
       )}
     </AnimatePresence>

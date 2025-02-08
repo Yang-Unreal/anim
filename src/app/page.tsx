@@ -13,7 +13,7 @@ export default function Home() {
     <main
       className={`${
         showPage ? "opacity-100" : "opacity-0"
-      } transition-opacity duration-300`}
+      } transition-opacity duration-100`}
     >
       <Landing />
       <Description />
