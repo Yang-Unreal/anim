@@ -22,6 +22,7 @@ export const useAnimationLogic = ({
   useEffect(() => {
     if (firstVisit) {
       dispatch("START");
+      setShowPage(false);
     } else {
       dispatch("COMPLETE");
       setShowPage(true);
