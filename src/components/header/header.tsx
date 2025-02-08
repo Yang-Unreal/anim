@@ -55,73 +55,67 @@ export default function Header() {
   });
 
   return (
-    <>
-      {showPage && (
-        <div>
-          <div className="flex absolute z-[33] top-0 left-0 w-full items-center justify-between px-[40px] py-5  box-border text-[20px] ">
-            <Link
-              className={`flex top-0 cursor-pointer group  ${transitionCursor} -translate-y-[30%]`}
-              href={"/"}
-              onClick={() => {
-                setTransitionTextContent("Home");
-              }}
-            >
-              <p className=" transition-logo  group-hover:rotate-[360deg] origin-center ">
-                ©
-              </p>
-              <div className="flex w-[50%] relative overflow-hidden whitespace-nowrap ml-[5px] transition-logo group-hover:pr-[70%]   ">
-                <p className="transition-logo group-hover:-translate-x-[29%] ">
-                  CODE BY DENNIS SNELLENBERG
-                </p>
-              </div>
-            </Link>
-            <div className="flex items-center text-[28px] ">
-              <Link
-                href={"/work"}
-                onClick={() => {
-                  setTransitionTextContent("WORK");
-                }}
-                className={`header-nav-link group ${transitionCursor} `}
-              >
-                <p>WORK</p>
-                <div className="indicator"></div>
-              </Link>
-
-              <Link
-                href={"/about"}
-                onClick={() => {
-                  setTransitionTextContent("ABOUT");
-                }}
-                className={`header-nav-link group ${transitionCursor}`}
-              >
-                <p>ABOUT</p>
-                <div className="indicator"></div>
-              </Link>
-
-              <Link
-                href={"/contact"}
-                onClick={() => {
-                  setTransitionTextContent("CONTACT");
-                }}
-                className={`header-nav-link group ${transitionCursor}`}
-              >
-                <p>CONTACT</p>
-                <div className="indicator"></div>
-              </Link>
-            </div>
+    <div className={`${!showPage ? "opacity-0" : "opacity-100"} `}>
+      <div className="flex absolute z-[33] top-0 left-0 w-full items-center justify-between px-[40px] py-5  box-border text-[20px] ">
+        <Link
+          className={`flex top-0 cursor-pointer group  ${transitionCursor} -translate-y-[30%]`}
+          href={"/"}
+          onClick={() => {
+            setTransitionTextContent("Home");
+          }}
+        >
+          <p className=" transition-logo  group-hover:rotate-[360deg] origin-center ">
+            ©
+          </p>
+          <div className="flex w-[50%] relative overflow-hidden whitespace-nowrap ml-[5px] transition-logo group-hover:pr-[70%]   ">
+            <p className="transition-logo group-hover:-translate-x-[29%] ">
+              CODE BY DENNIS SNELLENBERG
+            </p>
           </div>
+        </Link>
+        <div className="flex items-center text-[28px] ">
+          <Link
+            href={"/work"}
+            onClick={() => {
+              setTransitionTextContent("WORK");
+            }}
+            className={`header-nav-link group ${transitionCursor} `}
+          >
+            <p>WORK</p>
+            <div className="indicator"></div>
+          </Link>
 
-          <MenuButton
-            isActive={menuIsActive}
-            ref={button}
-            onClick={() => setMenuIsActive(!menuIsActive)}
-          />
+          <Link
+            href={"/about"}
+            onClick={() => {
+              setTransitionTextContent("ABOUT");
+            }}
+            className={`header-nav-link group ${transitionCursor}`}
+          >
+            <p>ABOUT</p>
+            <div className="indicator"></div>
+          </Link>
 
-          <AnimatePresence mode="wait">
-            {menuIsActive && <Nav />}
-          </AnimatePresence>
+          <Link
+            href={"/contact"}
+            onClick={() => {
+              setTransitionTextContent("CONTACT");
+            }}
+            className={`header-nav-link group ${transitionCursor}`}
+          >
+            <p>CONTACT</p>
+            <div className="indicator"></div>
+          </Link>
         </div>
-      )}
-    </>
+      </div>
+
+      <MenuButton
+        isActive={menuIsActive}
+        ref={button}
+        onClick={() => setMenuIsActive(!menuIsActive)}
+      />
+
+      <AnimatePresence mode="wait">{menuIsActive && <Nav />}</AnimatePresence>
+    </div>
   );
 }

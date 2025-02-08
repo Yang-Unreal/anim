@@ -10,16 +10,12 @@ import { usePreloaderContext } from "@/components/provider/preloaderContextProvi
 export default function Home() {
   const { showPage } = usePreloaderContext();
   return (
-    <>
-      {showPage && (
-        <main>
-          <Landing />
-          <Description />
-          <ProjectGallery initialProjects={projects} />
-          <SlidingImages />
-          <Contact />
-        </main>
-      )}
-    </>
+    <main className={`${!showPage ? "opacity-0" : "opacity-100"} `}>
+      <Landing />
+      <Description />
+      <ProjectGallery initialProjects={projects} />
+      <SlidingImages />
+      <Contact />
+    </main>
   );
 }
