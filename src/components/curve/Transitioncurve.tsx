@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useCallback, useEffect } from "react";
+import { useRef, useCallback } from "react";
 
 import { TransitionRouter } from "@/components/provider/transitionContextProvider";
 import { animate } from "motion/react";
@@ -20,31 +20,12 @@ export default function CurveTransition({ children }: ChildProps) {
 
   const paths = generatePaths({ width, height });
 
-  const disableScroll = useCallback(() => {
-    // Save current scroll position
-    const scrollPosition = window.scrollY;
-    document.body.style.overflow = "hidden";
-    document.body.style.position = "fixed";
-    document.body.style.width = "100%";
-    document.body.style.top = `-${scrollPosition}px`;
-  }, []);
-
-  const enableScroll = useCallback(() => {
-    const scrollPosition = parseInt(document.body.style.top || "0");
-    document.body.style.removeProperty("overflow");
-    document.body.style.removeProperty("position");
-    document.body.style.removeProperty("width");
-    document.body.style.removeProperty("top");
-    window.scrollTo(0, Math.abs(scrollPosition));
-  }, []);
-
   const handleLeaveAnimation = useCallback(
     (next: () => void) => {
       if (!svgRef.current || !pathRef.current || !paraRef.current) {
         next();
         return;
       }
-      disableScroll();
 
       Promise.all([
         animate(
@@ -64,7 +45,7 @@ export default function CurveTransition({ children }: ChildProps) {
         ),
       ]).then(next);
     },
-    [disableScroll, paths.initial, paths.leave]
+    [paths.initial, paths.leave]
   );
 
   const handleEnterAnimation = useCallback(
@@ -73,9 +54,6 @@ export default function CurveTransition({ children }: ChildProps) {
         next();
         return;
       }
-      enableScroll();
-      window.scrollTo({ top: 0 });
-      disableScroll();
 
       Promise.all([
         animate(
@@ -108,19 +86,11 @@ export default function CurveTransition({ children }: ChildProps) {
           }
         ),
       ]).then(() => {
-        enableScroll();
-
         next();
       });
     },
-    [disableScroll, enableScroll, paths.enter]
+    [paths.enter]
   );
-
-  useEffect(() => {
-    return () => {
-      enableScroll();
-    };
-  }, [enableScroll]);
 
   return (
     <TransitionRouter
