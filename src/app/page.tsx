@@ -10,7 +10,7 @@ import { usePreloaderContext } from "@/components/provider/preloaderContextProvi
 export default function Home() {
   const { showPage } = usePreloaderContext();
   return (
-    <main className={`${!showPage ? "opacity-0" : "opacity-100"} `}>
+    <main className={`invisible ${showPage ? "!visible" : ""}`}>
       <Landing />
       <Description />
       <ProjectGallery initialProjects={projects} />
