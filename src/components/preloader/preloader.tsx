@@ -21,11 +21,12 @@ const words = [
 
 const slideUp = {
   initial: { y: 0 },
-  exit: {
+  animate: {
     y: "-100vh",
     transition: {
       duration: 0.8,
       ease: [0.76, 0, 0.24, 1],
+      delay: 2.2,
     },
   },
 };
@@ -81,7 +82,7 @@ export const Preloader = () => {
         <motion.div
           variants={slideUp}
           initial="initial"
-          exit="exit"
+          animate="animate"
           className="fixed top-0 left-0 w-full h-screen flex items-center justify-center z-50 bg-[#141516]"
         >
           <motion.p
